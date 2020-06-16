@@ -15,12 +15,11 @@ export class Tab1Page {
     this.getHelloWorld();
   }
 
-  getHelloWorld() {
-    return this.backendService.getHelloWorld().subscribe(data =>
-      {
-        this.value = data.value;
-        console.log(data);
-      })
+  async getHelloWorld() {
+    await this.backendService.getHelloWorld();
+    this.value = this.backendService.getData();
+    console.log('value : ');
+    console.log(this.value)
   }
 
 }
