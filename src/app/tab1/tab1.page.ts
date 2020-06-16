@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { BackendService } from './../services/backend.service';
+
 
 @Component({
   selector: 'app-tab1',
@@ -7,6 +9,18 @@ import { Component } from '@angular/core';
 })
 export class Tab1Page {
 
-  constructor() {}
+  private value: string;
+
+  constructor(private backendService: BackendService) {
+    this.getHelloWorld();
+  }
+
+  getHelloWorld() {
+    return this.backendService.getHelloWorld().subscribe(data =>
+      {
+        this.value = data.value;
+        console.log(data);
+      })
+  }
 
 }
