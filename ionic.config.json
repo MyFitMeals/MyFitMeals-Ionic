@@ -1,0 +1,7 @@
+{
+  "name": "MyFitMeals-Ionic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
