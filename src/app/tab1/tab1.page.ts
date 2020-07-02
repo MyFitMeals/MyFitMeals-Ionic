@@ -2,6 +2,7 @@ import { RECIPES } from './../mocks/recipes';
 import { Recipe } from './../models/recipe';
 import { Component } from '@angular/core';
 import { BackendService } from './../services/backend.service';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -13,12 +14,14 @@ export class Tab1Page {
   private value: string;
   private recipes: Recipe[];
 
-  constructor(private backendService: BackendService) {
+  constructor(private backendService: BackendService, public loadingController: LoadingController) {
     
   }
 
   ionViewWillEnter() {
+    console.log('Tab 1 entering Ion')
     this.loadRecipes();
+    this.presentLoading();
   }
 
 
@@ -41,6 +44,18 @@ export class Tab1Page {
 
   getValue() {
     console.log(this.value);
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Veuillez patienter..',
+      duration: 2000
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
   }
 
 }
