@@ -18,11 +18,12 @@ export class Tab1Page {
     
   }
 
-  ionViewWillEnter() {
+  ngOnInit() {
     console.log('Tab 1 entering Ion')
     this.loadRecipes();
     this.presentLoading();
   }
+
 
 
   async getHelloWorld() {
