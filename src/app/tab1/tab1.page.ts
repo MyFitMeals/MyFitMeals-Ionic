@@ -32,6 +32,7 @@ export class Tab1Page {
     console.log('value : ');
     console.log(this.value)
   }
+  
 
   async loadRecipes() {
     await this.backendService.loadRecipes();
