@@ -79,9 +79,6 @@ export class BackendService {
         this.recipes = data;
       })
     }
-
-    console.log(this.recipes);
-    return this.recipes;
   }
 
   getRecipes(): Recipe[] {
@@ -102,9 +99,6 @@ export class BackendService {
         this.recipe = data;
       })
     }
-
-    console.log(this.recipe);
-    return this.recipe;
   }
 
   getRecipe(): Recipe {

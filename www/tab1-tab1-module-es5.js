@@ -457,10 +457,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     return this.backendService.loadRecipeById(this.recipeId);
 
                   case 2:
-                    console.log(this.backendService.getRecipe());
                     this.recipe = this.backendService.getRecipe();
 
-                  case 4:
+                  case 3:
                   case "end":
                     return _context.stop();
                 }
@@ -787,10 +786,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     });
 
                   case 7:
-                    console.log(this.recipes);
-                    return _context3.abrupt("return", this.recipes);
-
-                  case 9:
                   case "end":
                     return _context3.stop();
                 }
@@ -836,10 +831,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     });
 
                   case 7:
-                    console.log(this.recipe);
-                    return _context4.abrupt("return", this.recipe);
-
-                  case 9:
                   case "end":
                     return _context4.stop();
                 }
@@ -1149,10 +1140,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     return this.backendService.loadRecipes();
 
                   case 2:
-                    console.log(this.backendService.getRecipes());
                     this.recipes = this.backendService.getRecipes();
 
-                  case 4:
+                  case 3:
                   case "end":
                     return _context6.stop();
                 }

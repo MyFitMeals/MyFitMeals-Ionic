@@ -36,7 +36,6 @@ export class Tab1Page {
 
   async loadRecipes() {
     await this.backendService.loadRecipes();
-    console.log(this.backendService.getRecipes());
     this.recipes = this.backendService.getRecipes();
   }
 

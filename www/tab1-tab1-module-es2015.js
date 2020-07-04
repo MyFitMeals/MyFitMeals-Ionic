@@ -255,7 +255,6 @@ let RecipeComponent = class RecipeComponent {
     loadRecipe() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             yield this.backendService.loadRecipeById(this.recipeId);
-            console.log(this.backendService.getRecipe());
             this.recipe = this.backendService.getRecipe();
         });
     }
@@ -432,8 +431,6 @@ let BackendService = class BackendService {
                     this.recipes = data;
                 });
             }
-            console.log(this.recipes);
-            return this.recipes;
         });
     }
     getRecipes() {
@@ -453,8 +450,6 @@ let BackendService = class BackendService {
                     this.recipe = data;
                 });
             }
-            console.log(this.recipe);
-            return this.recipe;
         });
     }
     getRecipe() {
@@ -623,7 +618,6 @@ let Tab1Page = class Tab1Page {
     loadRecipes() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             yield this.backendService.loadRecipes();
-            console.log(this.backendService.getRecipes());
             this.recipes = this.backendService.getRecipes();
         });
     }

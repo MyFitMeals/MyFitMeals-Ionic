@@ -30,7 +30,6 @@ export class RecipeComponent implements OnInit {
 
 async loadRecipe() {
   await this.backendService.loadRecipeById(this.recipeId);
-  console.log(this.backendService.getRecipe());
   this.recipe = this.backendService.getRecipe();
 }
 
