@@ -50,7 +50,7 @@ export class Tab2Page {
     formData.append('tips', this.registerForm.value.tips);
 
 
-    this.http.post<any>('http://localhost:5000/recipes/', formData).subscribe(
+    this.http.post<any>('https://myfitmeals.herokuapp/recipes/', formData).subscribe(
       (res) => console.log(res),
       (err) => console.log(err)
     );

@@ -67,14 +67,14 @@ export class BackendService {
 
   async loadRecipes() {
     if(this.plt.is('cordova')) {
-      await this.getHttpNative('http://localhost:5000/recipes').then(data => {
+      await this.getHttpNative('https://myfitmeals.herokuapp.com/recipes').then(data => {
         console.log(data);
         this.recipes = JSON.parse(data.data);
       })
     }
 
     else {
-      await this.getHttp('http://localhost:5000/recipes').then(data => {
+      await this.getHttp('https://myfitmeals.herokuapp.com/recipes').then(data => {
         console.log(data);
         this.recipes = data;
       })
@@ -113,6 +113,6 @@ export class BackendService {
 
   getRecipeImage(recipe: Recipe)
   {
-    return `http://localhost:5000/recipes/images/${recipe.imageURL}`;
+    return recipe.imageURL;
   }
 }
