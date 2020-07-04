@@ -638,7 +638,7 @@ let Tab1Page = class Tab1Page {
             const loading = yield this.loadingController.create({
                 cssClass: 'my-custom-class',
                 message: 'Veuillez patienter..',
-                duration: 2000
+                duration: 1000
             });
             yield loading.present();
             const { role, data } = yield loading.onDidDismiss();

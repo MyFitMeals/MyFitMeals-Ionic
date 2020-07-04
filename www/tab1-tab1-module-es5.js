@@ -1184,7 +1184,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     return this.loadingController.create({
                       cssClass: 'my-custom-class',
                       message: 'Veuillez patienter..',
-                      duration: 2000
+                      duration: 1000
                     });
 
                   case 2:

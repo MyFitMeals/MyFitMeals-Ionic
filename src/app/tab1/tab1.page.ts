@@ -52,7 +52,7 @@ export class Tab1Page {
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
       message: 'Veuillez patienter..',
-      duration: 2000
+      duration: 1000
     });
     await loading.present();
 
