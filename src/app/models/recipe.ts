@@ -9,5 +9,5 @@ export class Recipe
     instructions: string;
     ingredients: string;
     tips: string;
-    image: any;
+    imageURL: any;
 }

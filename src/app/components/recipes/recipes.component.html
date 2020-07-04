@@ -2,7 +2,7 @@
   <div class ="testOverlay">
     <ion-badge color="light">{{recipe.calories}} cal</ion-badge>
   </div>
-  <img src="data:image/png;base64,{{recipe.image.base64}}"  />
+  <img src="{{getRecipeImage()}}"  />
   <ion-card-header>
     <ion-card-title>{{recipe.name}}</ion-card-title>
     <ion-card-subtitle>

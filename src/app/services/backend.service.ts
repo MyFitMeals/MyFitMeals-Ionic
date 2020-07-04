@@ -17,6 +17,7 @@ export class BackendService {
   private data;
   private recipes;
   private recipe;
+  private image;
 
   constructor(private http: HttpClient, private httpNative: HTTP, private plt: Platform, private loadingCtrl: LoadingController) { }
 
@@ -41,14 +42,14 @@ export class BackendService {
     console.log('Im here in service !')
 
     if(this.plt.is('cordova')) {
-      await this.getHttpNative('http://myfitmeals.herokuapp.com/').then(data => {
+      await this.getHttpNative('https://myfitmeals.herokuapp.com/').then(data => {
         console.log(data);
         this.data = JSON.parse(data.data);
       })
     }
 
     else {
-      await this.getHttp('http://myfitmeals.herokuapp.com/').then(data => {
+      await this.getHttp('https://myfitmeals.herokuapp.com/').then(data => {
         console.log(data);
         this.data = data;
       })
@@ -66,14 +67,14 @@ export class BackendService {
 
   async loadRecipes() {
     if(this.plt.is('cordova')) {
-      await this.getHttpNative('http://myfitmeals.herokuapp.com/recipes').then(data => {
+      await this.getHttpNative('http://localhost:5000/recipes').then(data => {
         console.log(data);
         this.recipes = JSON.parse(data.data);
       })
     }
 
     else {
-      await this.getHttp('http://myfitmeals.herokuapp.com/recipes').then(data => {
+      await this.getHttp('http://localhost:5000/recipes').then(data => {
         console.log(data);
         this.recipes = data;
       })
@@ -89,14 +90,14 @@ export class BackendService {
 
   async loadRecipeById(recipeId) {
     if(this.plt.is('cordova')) {
-      await this.getHttpNative('http://myfitmeals.herokuapp.com/recipes/' + recipeId).then(data => {
+      await this.getHttpNative('https://myfitmeals.herokuapp.com/recipes/' + recipeId).then(data => {
         console.log(data);
         this.recipe = JSON.parse(data.data);
       })
     }
 
     else {
-      await this.getHttp('http://myfitmeals.herokuapp.com/recipes/' + recipeId).then(data => {
+      await this.getHttp('https://myfitmeals.herokuapp.com/recipes/' + recipeId).then(data => {
         console.log(data);
         this.recipe = data;
       })
@@ -108,5 +109,10 @@ export class BackendService {
 
   getRecipe(): Recipe {
     return this.recipe;
+  }
+
+  getRecipeImage(recipe: Recipe)
+  {
+    return `http://localhost:5000/recipes/images/${recipe.imageURL}`;
   }
 }

@@ -1,3 +1,4 @@
+import { BackendService } from './../../services/backend.service';
 import { Recipe } from './../../models/recipe';
 import { Component, OnInit, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -10,13 +11,14 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class RecipesComponent implements OnInit {
   @Input() recipe: Recipe;
   imagePath;
-  constructor(private sanitizer: DomSanitizer) { }
+  constructor(private sanitizer: DomSanitizer, private backendService: BackendService) { }
 
   ngOnInit() {
-    this.getImage();
+    //this.getImage();
+    this.getRecipeImage();
   }
 
-  getImage() {
+/*   getImage() {
     this.recipe.image.base64 = this.arrayBufferToBase64(this.recipe.image.data.data);
   }
 
@@ -28,6 +30,11 @@ export class RecipesComponent implements OnInit {
       binary += String.fromCharCode(bytes[i]);
     }
     return window.btoa(binary);
+  } */
+
+  getRecipeImage()
+  {
+    return this.backendService.getRecipeImage(this.recipe);
   }
 
 }

@@ -1,4 +1,4 @@
-import { RECIPES } from './../mocks/recipes';
+
 import { Recipe } from './../models/recipe';
 import { Component } from '@angular/core';
 import { BackendService } from './../services/backend.service';
