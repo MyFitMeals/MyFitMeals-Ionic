@@ -162,7 +162,7 @@ let Tab2Page = class Tab2Page {
         formData.append('preparationTime', this.registerForm.value.preparationTime);
         formData.append('ingredients', this.registerForm.value.ingredients);
         formData.append('tips', this.registerForm.value.tips);
-        this.http.post('https://myfitmeals.herokuapp/recipes/', formData).subscribe((res) => console.log(res), (err) => console.log(err));
+        this.http.post('https://myfitmeals.herokuapp.com/recipes/', formData).subscribe((res) => console.log(res), (err) => console.log(err));
     }
 };
 Tab2Page.ctorParameters = () => [

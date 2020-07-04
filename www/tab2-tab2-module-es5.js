@@ -268,7 +268,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           formData.append('preparationTime', this.registerForm.value.preparationTime);
           formData.append('ingredients', this.registerForm.value.ingredients);
           formData.append('tips', this.registerForm.value.tips);
-          this.http.post('https://myfitmeals.herokuapp/recipes/', formData).subscribe(function (res) {
+          this.http.post('https://myfitmeals.herokuapp.com/recipes/', formData).subscribe(function (res) {
             return console.log(res);
           }, function (err) {
             return console.log(err);
