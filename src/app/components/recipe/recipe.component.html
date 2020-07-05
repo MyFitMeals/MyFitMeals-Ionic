@@ -1,5 +1,99 @@
-<app-header></app-header>
-<p>
-  {{getRecipe()?.name}}
-  {{getRecipe()?.calories}}
-</p>
+<app-header-back></app-header-back>
+<ion-content>
+  <div class ="testOverlay">
+    <ion-badge color="light">
+      <ion-icon name="flame-outline" style = "color: red; font-size: 16px;"></ion-icon>
+      {{getRecipe()?.calories}} cal</ion-badge>
+      <br>
+    <ion-badge color="light">
+      <ion-icon name="alarm-outline" style = "color: red; font-size: 16px;"></ion-icon>
+            {{getRecipe()?.preparationTime}} min 
+    </ion-badge>
+  </div>
+  <div class = "recipeImage">
+    <ion-img [src] = "getRecipe()?.imageURL"></ion-img>
+  </div>
+  <div class = "name">
+    <span id = "recipeName">{{getRecipe()?.name}}</span>  
+  </div>
+
+  <div class = "features">
+    <ion-segment color = "danger" [(ngModel)] = "featureSegment">
+      <ion-segment-button value="A propos">
+        <ion-label>A propos</ion-label>
+      </ion-segment-button>
+
+      <ion-segment-button value="Ingredients">
+        <ion-label>Ingredients</ion-label>
+      </ion-segment-button>
+
+      <ion-segment-button value="Instructions">
+        <ion-label>Instructions</ion-label>
+      </ion-segment-button>
+
+<!--       <ion-segment-button value="Conseils">
+        <ion-label>Conseils</ion-label>
+      </ion-segment-button> -->
+    </ion-segment>
+  </div>
+
+  <div [ngSwitch] = "featureSegment">
+    <ion-list *ngSwitchCase = "'A propos'">
+        <ion-item  lines = "none">
+            <div class = "macronutriments">
+              <div id = "proteins" class = "macros">
+                
+                <span class = "macrosInfos">{{getRecipe()?.proteins}}g</span>
+                <br>
+                <span>Protéines</span>
+              </div>
+          
+              <div id = "carbs" class = "macros">
+                <span class = "macrosInfos">{{getRecipe()?.carbs}}g</span>
+                <br>
+                <span>Glucides</span>
+              </div>
+          
+              <div id = "fats" class = "macros">
+                <span class = "macrosInfos">{{getRecipe()?.fats}}g</span>
+                <br>
+                <span>Lipides</span>
+              </div>
+            </div>
+
+
+
+
+      </ion-item>
+
+      <ion-item lines = "none">
+        <div class = "infosRecipe">
+          <span style = "font-size: 20px; font-weight: bold;">
+            
+          </span>
+        </div>
+      </ion-item>
+
+    </ion-list>
+  
+    <ion-list *ngSwitchCase = "'Ingredients'" lines = "none">
+      <ion-item>
+        <span>{{getRecipe()?.ingredients}}</span>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngSwitchCase = "'Instructions'" lines = "none">
+      <ion-item>
+        <span>{{getRecipe()?.instructions}}</span>
+      </ion-item>
+    </ion-list>
+  
+    <ion-list *ngSwitchCase = "'Conseils'">
+      <ion-item>
+        <span>{{getRecipe()?.tips}}</span>
+      </ion-item>
+    </ion-list>
+  </div>
+  
+  
+</ion-content>

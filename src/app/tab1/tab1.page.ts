@@ -20,8 +20,14 @@ export class Tab1Page {
 
   ngOnInit() {
     console.log('Tab 1 entering Ion')
-    this.loadRecipes();
-    this.presentLoading();
+    this.loadRecipes().then(res =>
+      {
+        loading.then(loaded =>
+          {
+            loaded.dismiss();
+          })
+      });
+    let loading = this.presentLoading();
   }
 
 
@@ -50,13 +56,10 @@ export class Tab1Page {
   async presentLoading() {
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
-      message: 'Veuillez patienter..',
-      duration: 1000
+      message: 'Veuillez patienter..'
     });
     await loading.present();
-
-    const { role, data } = await loading.onDidDismiss();
-    console.log('Loading dismissed!');
+    return loading;
   }
 
 }

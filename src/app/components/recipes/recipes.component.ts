@@ -10,12 +10,9 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class RecipesComponent implements OnInit {
   @Input() recipe: Recipe;
-  imagePath;
   constructor(private sanitizer: DomSanitizer, private backendService: BackendService) { }
 
   ngOnInit() {
-    //this.getImage();
-    this.getRecipeImage();
   }
 
 /*   getImage() {
@@ -31,10 +28,5 @@ export class RecipesComponent implements OnInit {
     }
     return window.btoa(binary);
   } */
-
-  getRecipeImage()
-  {
-    return this.backendService.getRecipeImage(this.recipe);
-  }
 
 }

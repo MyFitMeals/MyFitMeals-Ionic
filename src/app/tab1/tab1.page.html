@@ -3,7 +3,19 @@
 <ion-content>
 
   <app-macronutriments></app-macronutriments>
-  <app-recipes *ngFor = "let recipe of getRecipes()" [recipe] = "recipe" [routerLink]="['./', recipe._id]"></app-recipes>
 
+  <ion-list>
+    <ion-item class="eventItem" *ngFor = "let recipe of getRecipes()" [id]="recipe.id" lines="none" >
+      <app-recipes [recipe] = "recipe" [routerLink]="['./', recipe._id]"></app-recipes>
+    </ion-item>
+  </ion-list>
+
+
+  
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button color="danger" [routerLink] = "['/tabs/tab2']">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
 </ion-content>

@@ -1,3 +1,4 @@
+import { HeaderBackComponent } from './header-back/header-back.component';
 import { RecipeComponent } from './recipe/recipe.component';
 import { MacronutrimentsComponent } from './macronutriments/macronutriments.component';
 import { RecipesComponent } from './recipes/recipes.component';
@@ -16,7 +17,7 @@ import { HeaderComponent } from './header/header.component';
         FormsModule,
         RouterModule
     ],
-    declarations: [HeaderComponent, RecipesComponent, MacronutrimentsComponent, RecipeComponent],
-    exports: [HeaderComponent, RecipesComponent, MacronutrimentsComponent, RecipeComponent]
+    declarations: [HeaderComponent, HeaderBackComponent, RecipesComponent, MacronutrimentsComponent, RecipeComponent],
+    exports: [HeaderComponent, HeaderBackComponent, RecipesComponent, MacronutrimentsComponent, RecipeComponent]
 })
 export class ComponentsModule {}

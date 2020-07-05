@@ -104,9 +104,4 @@ export class BackendService {
   getRecipe(): Recipe {
     return this.recipe;
   }
-
-  getRecipeImage(recipe: Recipe)
-  {
-    return recipe.imageURL;
-  }
 }

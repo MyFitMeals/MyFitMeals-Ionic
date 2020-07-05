@@ -1,8 +1,10 @@
 <ion-card class="myCard" >
   <div class ="testOverlay">
-    <ion-badge color="light">{{recipe.calories}} cal</ion-badge>
+    <ion-badge color="light">
+      <ion-icon name="flame-outline" style = "color: red; font-size: 16px;"></ion-icon>
+      {{recipe.calories}} cal</ion-badge>
   </div>
-  <img src="{{getRecipeImage()}}"  />
+  <ion-img [src]="recipe.imageURL"> </ion-img>
   <ion-card-header>
     <ion-card-title>{{recipe.name}}</ion-card-title>
     <ion-card-subtitle>
