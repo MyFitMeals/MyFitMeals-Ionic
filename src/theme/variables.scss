@@ -226,3 +226,12 @@
     --ion-tab-bar-background: #1f1f1f;
   }
 }
+
+@font-face {
+  font-family: 'ProximaNova';
+  src: url('../assets/fonts/ProximaNova-Regular.otf');//mine
+}
+
+* {
+  font-family: 'ProximaNova';
+}
