@@ -1,8 +1,11 @@
 
+
 import { Recipe } from './../models/recipe';
 import { Component } from '@angular/core';
 import { BackendService } from './../services/backend.service';
 import { LoadingController } from '@ionic/angular';
+import { PopoverController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-tab1',
@@ -14,7 +17,8 @@ export class Tab1Page {
   private value: string;
   private recipes: Recipe[];
 
-  constructor(private backendService: BackendService, public loadingController: LoadingController) {
+  constructor(private backendService: BackendService, public loadingController: LoadingController,
+    private popoverController: PopoverController) {
     
   }
 

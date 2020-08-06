@@ -1,3 +1,4 @@
+import { FavoritesService } from './../services/favorites.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,6 +8,11 @@ import { Component } from '@angular/core';
 })
 export class Tab3Page {
 
-  constructor() {}
+  constructor(private favoritesService: FavoritesService) {}
 
+
+  getFavorites()
+  {
+    return this.favoritesService.getFavorites();
+  }
 }

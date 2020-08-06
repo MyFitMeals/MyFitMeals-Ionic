@@ -1,14 +1,17 @@
-import { FavoritesService } from './../services/favorites.service';
+import { Component, OnInit } from '@angular/core';
+import { PopoverController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-tab2',
-  templateUrl: 'tab2.page.html',
-  styleUrls: ['tab2.page.scss']
+  selector: 'app-add-recipe',
+  templateUrl: './add-recipe.page.html',
+  styleUrls: ['./add-recipe.page.scss'],
 })
-export class Tab2Page {
+export class AddRecipePage implements OnInit {
+
+  ngOnInit() {
+  }
 
   private images;
 
@@ -26,7 +29,7 @@ export class Tab2Page {
     }
   );
 
-  constructor(private http: HttpClient, private favoritesService: FavoritesService) {}
+  constructor(private http: HttpClient, private popoverController: PopoverController) {}
 
   selectImage(event) {
     if(event.target.files.length > 0) 
@@ -56,16 +59,4 @@ export class Tab2Page {
       (err) => console.log(err)
     );
   }
-
-  getFavorites()
-  {
-    return this.favoritesService.getFavorites();
-  }
-
-  noFavorites()
-  {
-    return this.favoritesService.getFavorites().length == 0;
-  }
-
-
 }

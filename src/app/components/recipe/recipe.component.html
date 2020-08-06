@@ -9,6 +9,16 @@
       <ion-icon name="alarm-outline" style = "color: red; font-size: 16px;"></ion-icon>
             {{getRecipe()?.preparationTime}} min 
     </ion-badge>
+
+    <ion-fab horizontal="start" vertical="bottom" slot="fixed">
+      <ion-fab-button color="warning" (click) = "favoriteRecipe()" *ngIf = "!isFavorite">
+        <ion-icon name="star-outline"></ion-icon>
+      </ion-fab-button>
+
+      <ion-fab-button color="warning" (click) = "unfavoriteRecipe()" *ngIf = "isFavorite">
+        <ion-icon name="star"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
   </div>
   <div class = "recipeImage">
     <ion-img [src] = "getRecipe()?.imageURL"></ion-img>
@@ -39,7 +49,7 @@
 
   <div [ngSwitch] = "featureSegment">
     <ion-list *ngSwitchCase = "'A propos'">
-        <ion-item  lines = "none">
+<!--         <ion-item  lines = "none">
             <div class = "macronutriments">
               <div id = "proteins" class = "macros">
                 
@@ -47,7 +57,6 @@
                 <br>
                 <span>Protéines</span>
               </div>
-          
               <div id = "carbs" class = "macros">
                 <span class = "macrosInfos">{{getRecipe()?.carbs}}g</span>
                 <br>
@@ -64,33 +73,42 @@
 
 
 
+      </ion-item> -->
+      <ion-item>
+        Valeurs nutritionnelles :
       </ion-item>
+      <app-macros-recipe [recipe] = "getRecipe()"></app-macros-recipe>
 
-      <ion-item lines = "none">
+
+<!--       <ion-item lines = "none">
         <div class = "infosRecipe">
           <span style = "font-size: 20px; font-weight: bold;">
-            
+            something
           </span>
         </div>
-      </ion-item>
+      </ion-item> -->
 
     </ion-list>
   
     <ion-list *ngSwitchCase = "'Ingredients'" lines = "none">
-      <ion-item>
-        <span>{{getRecipe()?.ingredients}}</span>
+      <ion-item class = 'instrucText' *ngFor = "let element of splitIngredients()" text-wrap>
+        -{{element}}
+<!--         <span>{{getRecipe()?.ingredients}}</span>
+        <span *ngFor = "let element of splitIngredients()">
+          {{element}}
+        </span> -->
       </ion-item>
     </ion-list>
 
     <ion-list *ngSwitchCase = "'Instructions'" lines = "none">
-      <ion-item>
-        <span>{{getRecipe()?.instructions}}</span>
+      <ion-item class = 'instrucText' *ngFor = "let element of splitInstructions()" text-wrap>
+        -{{element}}
       </ion-item>
     </ion-list>
   
     <ion-list *ngSwitchCase = "'Conseils'">
-      <ion-item>
-        <span>{{getRecipe()?.tips}}</span>
+      <ion-item class = 'instrucText' *ngFor = "let element of splitTips()" text-wrap>
+        -{{element}}
       </ion-item>
     </ion-list>
   </div>

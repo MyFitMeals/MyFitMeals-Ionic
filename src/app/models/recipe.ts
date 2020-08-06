@@ -10,4 +10,5 @@ export class Recipe
     ingredients: string;
     tips: string;
     imageURL: any;
+    _id: string;
 }

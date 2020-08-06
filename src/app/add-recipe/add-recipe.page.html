@@ -1,0 +1,90 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>addRecipe</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <form [formGroup] = "registerForm">
+      <ion-row>
+        <ion-col>
+          <ion-label position = "floating">Nom recette</ion-label>
+          <ion-input type = "text" name = "recipeName" formControlName="name"></ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-label position = "floating">Calories</ion-label>
+          <ion-input type = "number" name = "calories" formControlName="calories" ></ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-label position = "floating">Protéines</ion-label>
+          <ion-input type = "number" name = "proteins" formControlName="proteins"></ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-label position = "floating">Lipides</ion-label>
+          <ion-input type = "number" name = "fats" formControlName="fats"></ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-label position = "floating">Glucides</ion-label>
+          <ion-input type = "number" name = "carbs" formControlName="carbs"></ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-label position = "floating">Instructions</ion-label>
+          <ion-textarea type = "text" name = "instructions" formControlName="instructions"></ion-textarea>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-label position = "floating">Ingredients</ion-label>
+          <ion-textarea type = "text" name = "ingredients" formControlName="ingredients"></ion-textarea>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-label position = "floating">Temps de préparation</ion-label>
+          <ion-input type = "number" name = "preparationTime" formControlName="preparationTime"></ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-label position = "floating">Conseils</ion-label>
+          <ion-textarea type = "text" name = "tips" formControlName="tips"></ion-textarea>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-input type = "file" name = "image" (change) = "selectImage($event)"></ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-button type = "submit" (click) = "onSubmit()" style="font-size: 20px; margin-left: 10px;">Ajouter recette</ion-button>
+        </ion-col>
+      </ion-row>
+
+    </form>
+  </ion-grid> 
+</ion-content>

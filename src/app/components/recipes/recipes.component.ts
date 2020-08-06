@@ -29,4 +29,9 @@ export class RecipesComponent implements OnInit {
     return window.btoa(binary);
   } */
 
+  getRecipeIngredients(limit: number)
+  {
+    return this.recipe.ingredients.substring(0, limit) + '...';
+  }
+
 }
