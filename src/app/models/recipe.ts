@@ -1,11 +1,11 @@
 export class Recipe 
 {
     name: string;
-    calories: Number;
-    proteins: Number;
-    carbs: Number;
-    fats: Number;
-    preparationTime: Number;
+    calories: number;
+    proteins: number;
+    carbs: number;
+    fats: number;
+    preparationTime: number;
     instructions: string;
     ingredients: string;
     tips: string;

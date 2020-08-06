@@ -1,3 +1,5 @@
+import { RecipesLoaderService } from './../services/recipes-loader.service';
+import { MacrosComponent } from '../components/macros/macros.component';
 
 
 import { Recipe } from './../models/recipe';
@@ -14,11 +16,11 @@ import { PopoverController } from '@ionic/angular';
 })
 export class Tab1Page {
 
-  private value: string;
-  private recipes: Recipe[];
+  private value: string;/* 
+  private recipes: Recipe[]; */
 
   constructor(private backendService: BackendService, public loadingController: LoadingController,
-    private popoverController: PopoverController) {
+    private popoverController: PopoverController, private recipesLoder: RecipesLoaderService) {
     
   }
 
@@ -33,28 +35,17 @@ export class Tab1Page {
       });
     let loading = this.presentLoading();
   }
-
-
-
-  async getHelloWorld() {
-    await this.backendService.getHelloWorld();
-    this.value = this.backendService.getData();
-    console.log('value : ');
-    console.log(this.value)
-  }
   
 
   async loadRecipes() {
-    await this.backendService.loadRecipes();
-    this.recipes = this.backendService.getRecipes();
+/*     await this.backendService.loadRecipes();
+    this.recipes = this.backendService.getRecipes(); */
+
+    this.recipesLoder.loadRecipes();
   }
 
   getRecipes() {
-    return this.recipes
-  }
-
-  getValue() {
-    console.log(this.value);
+    return this.recipesLoder.getRecipes();
   }
 
   async presentLoading() {
@@ -64,6 +55,16 @@ export class Tab1Page {
     });
     await loading.present();
     return loading;
+  }
+
+  async presentPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      component: MacrosComponent,
+      cssClass: 'my-custom-class',
+      event: ev,
+      translucent: true
+    });
+    return await popover.present();
   }
 
 }

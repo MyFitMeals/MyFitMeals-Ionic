@@ -2,7 +2,7 @@
 
 <ion-content>
 
-  <app-macronutriments></app-macronutriments>
+  <!-- <app-macronutriments></app-macronutriments> -->
 
   <ion-list>
     <ion-item class="eventItem" *ngFor = "let recipe of getRecipes()" [id]="recipe.id" lines="none" >
@@ -23,5 +23,13 @@
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+
+  <ion-fab horizontal="start" vertical="bottom" slot="fixed">
+    <ion-fab-button color="primary" (click) = "presentPopover()">
+      <ion-icon name="pizza-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
 
 </ion-content>

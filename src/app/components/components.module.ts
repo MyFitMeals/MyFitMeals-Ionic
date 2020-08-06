@@ -1,3 +1,4 @@
+import { MacrosComponent } from './macros/macros.component';
 import { FormsModule } from '@angular/forms';
 import { MacrosRecipeComponent } from './macros-recipe/macros-recipe.component';
 import { HeaderBackComponent } from './header-back/header-back.component';
@@ -18,8 +19,9 @@ import { HeaderComponent } from './header/header.component';
         RouterModule,
         FormsModule
     ],
-    declarations: [HeaderComponent, HeaderBackComponent, RecipesComponent, MacronutrimentsComponent, RecipeComponent, MacrosRecipeComponent],
+    declarations: [HeaderComponent, HeaderBackComponent, RecipesComponent, MacronutrimentsComponent, 
+        RecipeComponent, MacrosRecipeComponent, MacrosComponent],
     exports: [HeaderComponent, HeaderBackComponent, RecipesComponent, MacronutrimentsComponent, 
-        RecipeComponent, MacrosRecipeComponent]
+        RecipeComponent, MacrosRecipeComponent, MacrosComponent]
 })
 export class ComponentsModule {}

@@ -1,3 +1,4 @@
+import { MacrosService } from './../../services/macros.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -13,7 +14,7 @@ export class MacronutrimentsComponent implements OnInit {
   carbsRange: string;
   fatsRange: string;
 
-  constructor() { }
+  constructor(private macrosService: MacrosService) { }
 
   ngOnInit() {
     this.yudsegment = "proteins";
