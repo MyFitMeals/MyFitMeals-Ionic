@@ -1,3 +1,5 @@
+import { LoadingController } from '@ionic/angular';
+import { AuthService } from './../services/auth.service';
 import { FavoritesService } from './../services/favorites.service';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
@@ -26,7 +28,25 @@ export class Tab2Page {
     }
   );
 
-  constructor(private http: HttpClient, private favoritesService: FavoritesService) {}
+  
+/*   ngOnInit() {
+    console.log('Tab 2 entering Ion')
+    this.loadRecipes().then(res =>
+      {
+        loading.then(loaded =>
+          {
+            console.log('inside loading');
+            console.log(res);
+            loaded.dismiss();
+          })
+      });
+    let loading = this.presentLoading();
+  } */
+
+
+  constructor(private http: HttpClient, private favoritesService: FavoritesService,
+              private authService: AuthService, public loadingController: LoadingController) {}
+          
 
   selectImage(event) {
     if(event.target.files.length > 0) 
@@ -35,6 +55,23 @@ export class Tab2Page {
       this.images = file;
     }
   }
+
+  async loadRecipes() {
+    /*     await this.backendService.loadRecipes();
+        this.recipes = this.backendService.getRecipes(); */
+    
+        await this.favoritesService.loadFavorites();
+      }
+
+
+      async presentLoading() {
+        const loading = await this.loadingController.create({
+          cssClass: 'my-custom-class',
+          message: 'Veuillez patienter..'
+        });
+        await loading.present();
+        return loading;
+      }
 
   onSubmit() {
 
@@ -65,6 +102,17 @@ export class Tab2Page {
   noFavorites()
   {
     return this.favoritesService.getFavorites().length == 0;
+  }
+
+  getRecipes()
+  {
+    this.authService.getAllRecipes().subscribe(res => {
+      console.log(res);
+      console.log('aftre');
+      console.log(res['recipes']);
+      console.log(this.favoritesService.getFavorites())
+      //return res['recipes']
+    });
   }
 
 

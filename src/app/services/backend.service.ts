@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { Recipe } from './../models/recipe';
 import { Platform, LoadingController } from '@ionic/angular';
 import { HTTP } from '@ionic-native/http/ngx';
@@ -18,6 +19,8 @@ export class BackendService {
   private recipes;
   private recipe;
   private image;
+  private favorites;
+  private url = environment.heroku;
 
   constructor(private http: HttpClient, private httpNative: HTTP, private plt: Platform, private loadingCtrl: LoadingController) { }
 
@@ -42,14 +45,14 @@ export class BackendService {
     console.log('Im here in service !')
 
     if(this.plt.is('cordova')) {
-      await this.getHttpNative('https://myfitmeals.herokuapp.com/').then(data => {
+      await this.getHttpNative(this.url).then(data => {
         console.log(data);
         this.data = JSON.parse(data.data);
       })
     }
 
     else {
-      await this.getHttp('https://myfitmeals.herokuapp.com/').then(data => {
+      await this.getHttp(this.url).then(data => {
         console.log(data);
         this.data = data;
       })
@@ -67,14 +70,14 @@ export class BackendService {
 
   async loadRecipes() {
     if(this.plt.is('cordova')) {
-      await this.getHttpNative('https://myfitmeals.herokuapp.com/recipes').then(data => {
+      await this.getHttpNative(`${this.url}/recipes`).then(data => {
         console.log(data);
         this.recipes = JSON.parse(data.data);
       })
     }
 
     else {
-      await this.getHttp('https://myfitmeals.herokuapp.com/recipes').then(data => {
+      await this.getHttp(`${this.url}/recipes`).then(data => {
         console.log(data);
         this.recipes = data;
       })
@@ -87,14 +90,14 @@ export class BackendService {
 
   async loadRecipeById(recipeId) {
     if(this.plt.is('cordova')) {
-      await this.getHttpNative('https://myfitmeals.herokuapp.com/recipes/' + recipeId).then(data => {
+      await this.getHttpNative(`${this.url}/recipes/${recipeId}`).then(data => {
         console.log(data);
         this.recipe = JSON.parse(data.data);
       })
     }
 
     else {
-      await this.getHttp('https://myfitmeals.herokuapp.com/recipes/' + recipeId).then(data => {
+      await this.getHttp(`${this.url}/recipes/${recipeId}`).then(data => {
         console.log(data);
         this.recipe = data;
       })
@@ -103,5 +106,27 @@ export class BackendService {
 
   getRecipe(): Recipe {
     return this.recipe;
+  }
+
+
+  async loadFavorites() {
+    if(this.plt.is('cordova')) {
+      await this.getHttpNative(`${this.url}/users/recipes`).then(data => {
+        console.log(data);
+        this.favorites = JSON.parse(data.data);
+      })
+    }
+
+    else {
+      await this.getHttp(`${this.url}/users/recipes`).then(data => {
+        console.log(data);
+        this.favorites = data;
+      })
+    }
+  }
+
+  getFavorites(): Recipe[]
+  {
+    return this.favorites;
   }
 }

@@ -14,6 +14,7 @@ export class RecipesLoaderService {
   async loadRecipes() {
     await this.backendService.loadRecipes();
     this.recipes = this.backendService.getRecipes();
+    console.log(this.recipes);
   }
 
   getRecipes()
@@ -23,13 +24,19 @@ export class RecipesLoaderService {
 
   filterMacros(proteins: number, fats: number, carbs: number)
   {
-    this.recipes = this.recipes.filter(recipe =>
+    this.loadRecipes().then( result =>
       {
-        return Math.abs((recipe.proteins - proteins))  <= 10 &&
-               Math.abs(recipe.fats - fats) <= 10 &&
-               Math.abs(recipe.carbs - carbs) <= 10;
-      });
+        this.recipes = this.recipes.filter(recipe =>
+          {
+            return Math.abs((recipe.proteins - proteins))  <= 10 &&
+                   Math.abs(recipe.fats - fats) <= 10 &&
+                   Math.abs(recipe.carbs - carbs) <= 10;
+          });
+    
+          console.log(this.recipes);
+      }
 
-      console.log(this.recipes);
+    )
+
   }
 }

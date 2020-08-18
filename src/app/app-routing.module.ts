@@ -1,3 +1,5 @@
+import { RecipeComponent } from './components/recipe/recipe.component';
+import { AuthGuardService } from './services/auth-guard.service';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
@@ -10,6 +12,23 @@ const routes: Routes = [
     path: 'add-recipe',
     loadChildren: () => import('./add-recipe/add-recipe.module').then( m => m.AddRecipePageModule)
   },
+  {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'inside',
+    loadChildren: () => import('./pages/inside/inside.module').then( m => m.InsidePageModule),
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'recipes/:recipeId',
+    component: RecipeComponent
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
+  }
 ];
 @NgModule({
   imports: [

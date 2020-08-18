@@ -6,7 +6,7 @@
 
   <ion-list>
     <ion-item class="eventItem" *ngFor = "let recipe of getRecipes()" [id]="recipe.id" lines="none" >
-      <app-recipes [recipe] = "recipe" [routerLink]="['./', recipe._id]"></app-recipes>
+      <app-recipes [recipe] = "recipe" [routerLink]="['/recipes', recipe._id]"></app-recipes>
     </ion-item>
   </ion-list>
 
@@ -25,7 +25,7 @@
   </ion-fab>
 
   <ion-fab horizontal="start" vertical="bottom" slot="fixed">
-    <ion-fab-button color="primary" (click) = "presentPopover()">
+    <ion-fab-button color="primary" (click) = "presentPopover($event)">
       <ion-icon name="pizza-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>

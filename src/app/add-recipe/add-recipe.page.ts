@@ -1,7 +1,9 @@
+import { RecipesLoaderService } from './../services/recipes-loader.service';
 import { Component, OnInit } from '@angular/core';
-import { PopoverController } from '@ionic/angular';
+import { PopoverController, ToastController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-recipe',
@@ -29,7 +31,8 @@ export class AddRecipePage implements OnInit {
     }
   );
 
-  constructor(private http: HttpClient, private popoverController: PopoverController) {}
+  constructor(private http: HttpClient, private popoverController: PopoverController, 
+    private toastController: ToastController, private router: Router, private recipesLoader: RecipesLoaderService) {}
 
   selectImage(event) {
     if(event.target.files.length > 0) 
@@ -55,8 +58,30 @@ export class AddRecipePage implements OnInit {
 
 
     this.http.post<any>('https://myfitmeals.herokuapp.com/recipes/', formData).subscribe(
-      (res) => console.log(res),
-      (err) => console.log(err)
+      (res) =>
+      {
+        this.presentToast('Recette ajoutée avec succès !');
+        console.log(res);
+        this.recipesLoader.loadRecipes().then(result =>
+          {
+            this.router.navigate(['tabs/tab1']);
+          })
+        
+      },
+      (err) =>
+      {
+        console.log(err);
+        this.presentToast('Echec d\'ajout de la recette... !')
+      } 
     );
+  }
+
+
+  async presentToast(msg: string) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 1000
+    });
+    toast.present();
   }
 }

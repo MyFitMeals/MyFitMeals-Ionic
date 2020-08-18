@@ -15,7 +15,7 @@
 
   <ion-list>
     <ion-item class="eventItem" *ngFor = "let recipe of getFavorites()" [id]="recipe.id" lines="none" >
-      <app-recipes [recipe] = "recipe" [routerLink]="['./', recipe._id]"></app-recipes>
+      <app-recipes [recipe] = "recipe" [routerLink]="['/recipes', recipe._id]"></app-recipes>
     </ion-item>
 
     <ion-item>
@@ -25,7 +25,6 @@
     </ion-item>
 
   </ion-list>
-
 
 </ion-content>
 

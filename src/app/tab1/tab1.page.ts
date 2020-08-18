@@ -24,7 +24,7 @@ export class Tab1Page {
     
   }
 
-  ngOnInit() {
+/*   ngOnInit() {
     console.log('Tab 1 entering Ion')
     this.loadRecipes().then(res =>
       {
@@ -34,7 +34,7 @@ export class Tab1Page {
           })
       });
     let loading = this.presentLoading();
-  }
+  } */
   
 
   async loadRecipes() {

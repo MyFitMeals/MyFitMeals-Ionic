@@ -1,3 +1,4 @@
+import { AuthService } from './auth.service';
 import { Recipe } from './../models/recipe';
 import { Injectable } from '@angular/core';
 
@@ -7,7 +8,7 @@ import { Injectable } from '@angular/core';
 export class FavoritesService {
 
   favorites: Recipe[];
-  constructor() {
+  constructor(private authService: AuthService) {
     this.favorites = [];
     console.log('I am in favorites services');
    }
@@ -15,6 +16,7 @@ export class FavoritesService {
   addFavorite(recipe: Recipe)
   {
     this.favorites.push(recipe);
+    this.addRecipe(recipe);
   }
 
   removeFavorite(recipe: Recipe)
@@ -26,11 +28,8 @@ export class FavoritesService {
           return true;
         }
       })
-  }
 
-  getFavorites()
-  {
-    return this.favorites;
+      this.removeRecipe(recipe);
   }
 
   isFavorite(recipe: Recipe)
@@ -53,5 +52,31 @@ export class FavoritesService {
       })
 
       return result;
+  }
+
+
+  addRecipe(recipe: Recipe) {
+    console.log(recipe);
+    this.authService.addRecipeToFavorites(recipe).subscribe(res => {
+      console.log(res);
+    });
+  }
+
+  removeRecipe(recipe: Recipe) {
+    this.authService.removeRecipeFromFavorites(recipe).subscribe(res => {
+      console.log(res);
+    });
+  }
+
+  async loadFavorites() {
+    
+    await this.authService.loadFavorites();
+    this.favorites = this.authService.getFavorites();
+    console.log(this.favorites);
+  }
+
+  getFavorites(): Recipe[]
+  {
+    return this.favorites;
   }
 }

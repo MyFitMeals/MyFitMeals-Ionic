@@ -1,3 +1,4 @@
+import { AuthService } from './../services/auth.service';
 import { FavoritesService } from './../services/favorites.service';
 import { Component } from '@angular/core';
 
@@ -8,11 +9,35 @@ import { Component } from '@angular/core';
 })
 export class Tab3Page {
 
-  constructor(private favoritesService: FavoritesService) {}
+  private firstName: String;
+  private lastName: String;
+
+
+  constructor(private favoritesService: FavoritesService,
+    private authService: AuthService) {
+      this.loadInformations();
+    }
 
 
   getFavorites()
   {
     return this.favoritesService.getFavorites();
+  }
+
+  loadInformations() {
+    this.authService.getInformations().subscribe(res => {
+      this.firstName = res['firstName'];
+      this.lastName = res['lastName'];
+    });
+  }
+
+  getFirstName()
+  {
+    return this.firstName;
+  }
+
+  getLastName()
+  {
+    return this.lastName;
   }
 }
