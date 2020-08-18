@@ -1,7 +1,7 @@
 import { RecipesLoaderService } from './../services/recipes-loader.service';
 import { MacrosComponent } from '../components/macros/macros.component';
 
-
+import { Router } from '@angular/router';
 import { Recipe } from './../models/recipe';
 import { Component } from '@angular/core';
 import { BackendService } from './../services/backend.service';
@@ -20,7 +20,8 @@ export class Tab1Page {
   private recipes: Recipe[]; */
 
   constructor(private backendService: BackendService, public loadingController: LoadingController,
-    private popoverController: PopoverController, private recipesLoder: RecipesLoaderService) {
+    private popoverController: PopoverController, private recipesLoder: RecipesLoaderService,
+    private router: Router) {
     
   }
 
@@ -65,6 +66,11 @@ export class Tab1Page {
       translucent: true
     });
     return await popover.present();
+  }
+
+  goToRecipeDetails(recipe: Recipe)
+  {
+    this.router.navigate(['/recipes', recipe]);
   }
 
 }

@@ -41,9 +41,10 @@ export class RecipeComponent implements OnInit {
             console.log(this.recipe);
             this.isFavorite = this.favoritesService.isFavorite(this.recipe);
             console.log(this.isFavorite);
+            this.featureSegment = "A propos";
         })
         let loading = this.presentLoading();
-        this.featureSegment = "A propos";
+       
   });
 
 }

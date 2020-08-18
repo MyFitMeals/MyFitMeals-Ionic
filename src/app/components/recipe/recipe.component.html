@@ -30,15 +30,15 @@
   <div class = "features">
     <ion-segment color = "danger" [(ngModel)] = "featureSegment">
       <ion-segment-button value="A propos">
-        <ion-label>A propos</ion-label>
-      </ion-segment-button>
-
-      <ion-segment-button value="Ingredients">
         <ion-label>Ingredients</ion-label>
       </ion-segment-button>
 
+      <ion-segment-button value="Ingredients">
+        <ion-label>Préparation</ion-label>
+      </ion-segment-button>
+
       <ion-segment-button value="Instructions">
-        <ion-label>Instructions</ion-label>
+        <ion-label>Conseils</ion-label>
       </ion-segment-button>
 
 <!--       <ion-segment-button value="Conseils">
@@ -49,64 +49,30 @@
 
   <div [ngSwitch] = "featureSegment">
     <ion-list *ngSwitchCase = "'A propos'">
-<!--         <ion-item  lines = "none">
-            <div class = "macronutriments">
-              <div id = "proteins" class = "macros">
-                
-                <span class = "macrosInfos">{{getRecipe()?.proteins}}g</span>
-                <br>
-                <span>Protéines</span>
-              </div>
-              <div id = "carbs" class = "macros">
-                <span class = "macrosInfos">{{getRecipe()?.carbs}}g</span>
-                <br>
-                <span>Glucides</span>
-              </div>
-          
-              <div id = "fats" class = "macros">
-                <span class = "macrosInfos">{{getRecipe()?.fats}}g</span>
-                <br>
-                <span>Lipides</span>
-              </div>
-            </div>
-
-
-
-
-      </ion-item> -->
-      <ion-item>
-        Valeurs nutritionnelles :
-      </ion-item>
       <app-macros-recipe [recipe] = "getRecipe()"></app-macros-recipe>
-
-
-<!--       <ion-item lines = "none">
-        <div class = "infosRecipe">
-          <span style = "font-size: 20px; font-weight: bold;">
-            something
-          </span>
-        </div>
-      </ion-item> -->
+      <ion-item class = 'instrucText' *ngFor = "let element of splitIngredients()" text-wrap>
+        -{{element}}
+      </ion-item>
 
     </ion-list>
   
-    <ion-list *ngSwitchCase = "'Ingredients'" lines = "none">
-      <ion-item class = 'instrucText' *ngFor = "let element of splitIngredients()" text-wrap>
+    <ion-list *ngSwitchCase = "'Ingredients'">
+      <app-macros-recipe [recipe] = "getRecipe()"></app-macros-recipe>
+
+      <ion-item class = 'instrucText' *ngFor = "let element of splitInstructions()" text-wrap>
         -{{element}}
-<!--         <span>{{getRecipe()?.ingredients}}</span>
-        <span *ngFor = "let element of splitIngredients()">
-          {{element}}
-        </span> -->
       </ion-item>
     </ion-list>
 
-    <ion-list *ngSwitchCase = "'Instructions'" lines = "none">
-      <ion-item class = 'instrucText' *ngFor = "let element of splitInstructions()" text-wrap>
+    <ion-list *ngSwitchCase = "'Instructions'">
+      <app-macros-recipe [recipe] = "getRecipe()"></app-macros-recipe>
+      <ion-item class = 'instrucText' *ngFor = "let element of splitTips()" text-wrap>
         -{{element}}
       </ion-item>
     </ion-list>
   
     <ion-list *ngSwitchCase = "'Conseils'">
+      <app-macros-recipe [recipe] = "getRecipe()"></app-macros-recipe>
       <ion-item class = 'instrucText' *ngFor = "let element of splitTips()" text-wrap>
         -{{element}}
       </ion-item>
