@@ -12,18 +12,18 @@
   
     <form [formGroup]="credentialsForm" (ngSubmit)="onSubmit()" class = "loginForm">
  
-      <ion-item>
+      <ion-item mode = "ios">
         <ion-label position="floating">Email</ion-label>
         <ion-input type="email" formControlName="email"></ion-input>
       </ion-item>
    
-      <ion-item>
+      <ion-item mode = "ios">
         <ion-label position="floating">Mot de passe</ion-label>
         <ion-input type="password" formControlName="password"></ion-input>
       </ion-item>
    
-      <ion-button expand="full" color="danger" type="submit" [disabled]="!credentialsForm.valid">Me connecter</ion-button>
-      <a type="button" [routerLink] = "['/register']">Créer un compte</a>
+      <ion-button mode = "ios" expand="full" color="danger" type="submit" [disabled]="!credentialsForm.valid">Me connecter</ion-button>
+      <a mode = "ios" type="button" [routerLink] = "['/register']">Créer un compte</a>
       <!-- <ion-button expand="full" type="button" (click)="register()" [disabled]="!credentialsForm.valid">Register</ion-button> -->
    
     </form>
