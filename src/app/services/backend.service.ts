@@ -41,6 +41,22 @@ export class BackendService {
     ).toPromise();
   }
 
+  deleteHttp(ApiURL) {
+    console.log('calling standard Http')
+
+     return this.http.delete(ApiURL).toPromise();
+  }
+
+   deleteHttpNative(ApiURL) {
+    console.log('Calling Native Http')
+
+    let nativeCall = this.httpNative.delete(ApiURL, {}, {
+      'Content-Type': 'application/json'
+    });
+    return from(nativeCall).pipe(
+      ).toPromise();
+    }
+
   async getHelloWorld() {
     console.log('Im here in service !')
 
@@ -128,5 +144,21 @@ export class BackendService {
   getFavorites(): Recipe[]
   {
     return this.favorites;
+  }
+
+
+  async deleteRecipe(recipe: Recipe)
+  {
+    if(this.plt.is('cordova')) {
+      await this.deleteHttpNative(`${this.url}/recipes/${recipe._id}`).then(data => {
+        console.log(data);
+      })
+    }
+
+    else {
+      await this.deleteHttp(`${this.url}/recipes/${recipe._id}`).then(data => {
+        console.log(data);
+      })
+    }
   }
 }

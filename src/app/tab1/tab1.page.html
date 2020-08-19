@@ -2,6 +2,34 @@
 
 <ion-content>
 
+  <div class = "recipesFilters">
+
+    <ion-chip outline = "true" color = "primary" [ngStyle] = "{'visibility': proteinFiltered? 'inherit':'hidden'}">
+      <ion-label>P {{getProteins()}}</ion-label>
+    </ion-chip>
+
+    <ion-chip outline = "true" color = "primary" [ngStyle] = "{'visibility': carbsFiltered? 'inherit':'hidden'}">
+      <ion-label>G {{getCarbs()}}</ion-label>
+    </ion-chip>
+
+    <ion-chip outline = "true" color = "primary" [ngStyle] = "{'visibility': fatsFiltered? 'inherit':'hidden'}">
+      <ion-label>L {{getFats()}}</ion-label>
+    </ion-chip>
+
+    <ion-chip mode = "ios" color = "danger" (click) = "presentPopover($event)">
+      Filtrer par macros
+    </ion-chip>
+
+<!--     <ion-chip outline = "true" color = "primary">
+      <ion-select placeholder="Trier par..">
+        <ion-select-option value="date">Date de parution <ion-icon name="pizza-outline"></ion-icon></ion-select-option>
+        <ion-select-option value="protein">Fort en protéines</ion-select-option>
+        <ion-select-option value="carbs">Fort en glucides</ion-select-option>
+        <ion-select-option value="fats">Fort en lipides</ion-select-option>
+      </ion-select>
+    </ion-chip> -->
+  </div>
+
   <!-- <app-macronutriments></app-macronutriments> -->
 
   <ion-list>
@@ -18,18 +46,25 @@
     </ion-fab-button>
   </ion-fab> -->
 
-  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
-    <ion-fab-button color="danger" [routerLink] = "['/add-recipe']">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
 
-  <ion-fab horizontal="start" vertical="bottom" slot="fixed">
+
+
+<!--   <ion-fab horizontal="start" vertical="bottom" slot="fixed">
     <ion-fab-button color="primary" (click) = "presentPopover($event)">
       <ion-icon name="pizza-outline"></ion-icon>
     </ion-fab-button>
-  </ion-fab>
+  </ion-fab> -->
 
 
 
 </ion-content>
+
+<ion-footer>
+  <div *ngIf = "isAdmin()">
+    <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+      <ion-fab-button color="danger" [routerLink] = "['/add-recipe']">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </div>
+</ion-footer>

@@ -1,3 +1,5 @@
+import { AuthService } from './../services/auth.service';
+import { MacrosService } from './../services/macros.service';
 import { RecipesLoaderService } from './../services/recipes-loader.service';
 import { MacrosComponent } from '../components/macros/macros.component';
 
@@ -18,10 +20,13 @@ export class Tab1Page {
 
   private value: string;/* 
   private recipes: Recipe[]; */
+  proteinFiltered: boolean = false;
+  carbsFiltered: boolean = false;
+  fatsFiltered: boolean = false;
 
   constructor(private backendService: BackendService, public loadingController: LoadingController,
     private popoverController: PopoverController, private recipesLoder: RecipesLoaderService,
-    private router: Router) {
+    private router: Router, private macrosService: MacrosService, private authService: AuthService) {
     
   }
 
@@ -71,6 +76,51 @@ export class Tab1Page {
   goToRecipeDetails(recipe: Recipe)
   {
     this.router.navigate(['/recipes', recipe]);
+  }
+
+
+  getProteins()
+  {
+    if(this.macrosService.getProteins() === 0 || !this.macrosService.getProteins())
+    {
+      this.proteinFiltered = false;
+      return 0;
+    }
+    else {
+      this.proteinFiltered = true;
+      return this.macrosService.getProteins();
+    }
+  }
+
+  getCarbs()
+  {
+    if(this.macrosService.getCarbs() === 0 || !this.macrosService.getCarbs())
+    {
+      this.carbsFiltered = false;
+      return 0;
+    }
+    else {
+      this.carbsFiltered = true;
+      return this.macrosService.getCarbs();
+    }
+  }
+
+  getFats()
+  {
+    if(this.macrosService.getFats() === 0 || !this.macrosService.getFats())
+    {
+      this.fatsFiltered = false;
+      return 0;
+    }
+    else {
+      this.fatsFiltered = true;
+      return this.macrosService.getFats();
+    }  
+  }
+
+  isAdmin()
+  {
+    return this.authService.isAdmin();
   }
 
 }

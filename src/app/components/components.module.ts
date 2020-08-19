@@ -1,5 +1,5 @@
 import { MacrosComponent } from './macros/macros.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MacrosRecipeComponent } from './macros-recipe/macros-recipe.component';
 import { HeaderBackComponent } from './header-back/header-back.component';
 import { RecipeComponent } from './recipe/recipe.component';
@@ -17,7 +17,8 @@ import { HeaderComponent } from './header/header.component';
         IonicModule,
         CommonModule,
         RouterModule,
-        FormsModule
+        FormsModule,
+        ReactiveFormsModule
     ],
     declarations: [HeaderComponent, HeaderBackComponent, RecipesComponent, MacronutrimentsComponent, 
         RecipeComponent, MacrosRecipeComponent, MacrosComponent],

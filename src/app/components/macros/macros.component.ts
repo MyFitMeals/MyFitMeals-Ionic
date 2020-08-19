@@ -1,7 +1,8 @@
 import { PopoverController } from '@ionic/angular';
 import { MacrosService } from './../../services/macros.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-macros',
@@ -13,10 +14,20 @@ export class MacrosComponent implements OnInit {
   private proteins: number;
   private carbs: number;
   private fats: number;
+  macrosForm: FormGroup;
+  
 
-  constructor(private macroService : MacrosService, private popOverController: PopoverController) { }
+  constructor(private macroService : MacrosService, private popOverController: PopoverController,
+    private formBuilder: FormBuilder) { }
 
-  ngOnInit() {}
+    ngOnInit() {
+    this.macrosForm = this.formBuilder.group({
+      proteins: ['', [Validators.required]],
+      carbs: ['', [Validators.required]],
+      fats: ['', [Validators.required]]
+    });
+  }
+
 
 
   setQuantity(macro: string, value)

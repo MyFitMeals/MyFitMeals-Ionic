@@ -1,4 +1,4 @@
-
+<!-- 
 
   <ion-row>
     <ion-col>
@@ -31,4 +31,27 @@
     <ion-col>
       <ion-button type = "submit" color = "danger" (click) = "resetMacros()">Reset</ion-button>
     </ion-col>
-  </ion-row>
+  </ion-row> -->
+
+  <form [formGroup]="macrosForm" (ngSubmit)="onSubmit()">
+ 
+    <ion-item mode = "ios">
+      <ion-label position="floating">Protéines</ion-label>
+      <ion-input type = "number" name = "proteins" formControlName="proteins" (input)="setQuantity('proteins', $event.target.value)"></ion-input>
+    </ion-item>
+
+ 
+    <ion-item mode = "ios">
+      <ion-label position="floating">Glucides</ion-label>
+      <ion-input type = "number" name = "carbs" formControlName="carbs" (input)="setQuantity('carbs', $event.target.value)"></ion-input>
+    </ion-item>
+
+    <ion-item mode = "ios">
+      <ion-label position="floating">Lipides</ion-label>
+      <ion-input type = "number" name = "fats" formControlName="fats" (input)="setQuantity('fats', $event.target.value)"></ion-input>
+    </ion-item>
+ 
+    <ion-button mode = "ios" type = "submit" style="font-size: 20px; margin-left: 10px;" [disabled]="!macrosForm.valid">Valider</ion-button>
+    <ion-button mode = "ios" color = "danger" (click) = "resetMacros()">Reset</ion-button>
+
+  </form>

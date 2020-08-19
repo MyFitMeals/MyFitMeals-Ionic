@@ -1,10 +1,11 @@
+import { RecipesLoaderService } from './../../services/recipes-loader.service';
+import { AuthService } from './../../services/auth.service';
 import { FavoritesService } from './../../services/favorites.service';
 import { Recipe } from './../../models/recipe';
 import { BackendService } from './../../services/backend.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { LoadingController } from '@ionic/angular';
-import { ToastController } from '@ionic/angular';
+import { ActivatedRoute, Router } from '@angular/router';
+import { LoadingController, ToastController } from '@ionic/angular';
 
 
 @Component({
@@ -18,10 +19,12 @@ export class RecipeComponent implements OnInit {
   private recipe: Recipe;
   featureSegment;
   isFavorite: boolean;
+  toSplit: boolean;
 
   constructor(private activatedRoute: ActivatedRoute, private backendService: BackendService, 
     public loadingController: LoadingController, public toastController: ToastController,
-    private favoritesService: FavoritesService) { }
+    private favoritesService: FavoritesService, private auth: AuthService, private router: Router,
+    private recipeLoader: RecipesLoaderService) { }
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(paramMap => {
@@ -41,7 +44,8 @@ export class RecipeComponent implements OnInit {
             console.log(this.recipe);
             this.isFavorite = this.favoritesService.isFavorite(this.recipe);
             console.log(this.isFavorite);
-            this.featureSegment = "A propos";
+            this.splitOrNot();
+            this.featureSegment = "Ingredients";
         })
         let loading = this.presentLoading();
        
@@ -87,7 +91,8 @@ unfavoriteRecipe()
 async presentToast(msg: string) {
   const toast = await this.toastController.create({
     message: msg,
-    duration: 1000
+    duration: 600,
+    mode: 'ios'
   });
   toast.present();
 }
@@ -118,8 +123,38 @@ splitInstructions()
 
 splitTips()
 {
-  let array = this.recipe.tips.split('-');
-  array.shift();
-  return array;
+  let array;
+    array = this.recipe.tips.split('-');
+    array.shift();
+    return array;
+}
+
+splitOrNot()
+{
+  if(this.recipe.tips.includes('-'))
+  {
+    this.toSplit = true;
+  }
+  else this.toSplit = false;
+}
+
+isAdmin()
+{
+  return this.auth.isAdmin();
+}
+
+deleteRecipe()
+{
+  this.backendService.deleteRecipe(this.recipe).then(res =>
+    {
+      this.recipeLoader.loadRecipes().then(resultat =>
+        {
+          this.router.navigate(['/tabs/tab1']);
+          this.presentToast('Recette supprimée avec succès !');
+        })
+    })
+  
+
+  
 }
 }

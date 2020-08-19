@@ -96,6 +96,8 @@ export class Tab2Page {
 
   getFavorites()
   {
+    console.log('is Admin ? : ');
+    console.log(this.authService.isAdmin());
     return this.favoritesService.getFavorites();
   }
 
@@ -112,6 +114,8 @@ export class Tab2Page {
       console.log(res['recipes']);
       console.log(this.favoritesService.getFavorites())
       //return res['recipes']
+
+      
     });
   }
 

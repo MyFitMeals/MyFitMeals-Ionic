@@ -1,0 +1,26 @@
+<ion-header mode = "ios" translucent>
+  <ion-toolbar mode = "ios" color="danger">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Nous contacter</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class = "sousHeader">
+    <img src = "../../../assets/niklas-rhose-FlmXvqlD-nI-unsplash-1@3x.png">
+    <ion-button expand="block" (click)="showPicker()">Sélectionnez un sujet</ion-button>
+  </div>
+
+  <form [formGroup]="contactUsForm" (ngSubmit)="onSubmit()" class = "loginForm">
+ 
+    <ion-item>
+      <ion-textarea type="text" formControlName="message" placeholder="Entrez plus d'informations ici..."></ion-textarea>
+    </ion-item>
+ 
+    <div style = "text-align: center; margin-top: 2em;">
+      <ion-button  color="danger" type="submit" [disabled]="!contactUsForm.valid">Envoyer</ion-button>
+    </div>
+  </form>
+</ion-content>

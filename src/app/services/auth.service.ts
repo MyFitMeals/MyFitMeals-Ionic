@@ -180,6 +180,11 @@ export class AuthService {
   isAuthenticated() {
     return this.authenticationState.value;
   }
+
+  isAdmin()
+  {
+    return this.user.admin;
+  }
  
   showAlert(msg) {
     let alert = this.alertController.create({

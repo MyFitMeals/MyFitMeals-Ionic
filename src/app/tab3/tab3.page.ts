@@ -40,4 +40,9 @@ export class Tab3Page {
   {
     return this.lastName;
   }
+
+  logout()
+  {
+    this.authService.logout();
+  }
 }
