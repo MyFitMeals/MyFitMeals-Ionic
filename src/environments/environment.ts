@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  url: 'http://localhost:5000',
-  host: 'localhost:5000',
+  url: 'https://myfitmeals.herokuapp.com',
+  host: 'myfitmeals.herokuapp.com',
   heroku: 'https://myfitmeals.herokuapp.com'
 };
 

@@ -8,5 +8,8 @@ if (environment.production) {
   enableProdMode();
 }
 
+import { HTTP } from '@ionic-native/http';
+HTTP.getPluginRef = () => "cordova.plugin.http";
+
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.log(err));

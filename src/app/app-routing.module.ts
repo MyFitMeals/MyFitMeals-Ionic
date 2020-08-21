@@ -32,6 +32,18 @@ const routes: Routes = [
   {
     path: 'contact-us',
     loadChildren: () => import('./pages/contact-us/contact-us.module').then( m => m.ContactUsPageModule)
+  },
+  {
+    path: 'politique',
+    loadChildren: () => import('./pages/politique/politique.module').then( m => m.PolitiquePageModule)
+  },
+  {
+    path: 'cgv',
+    loadChildren: () => import('./pages/cgv/cgv.module').then( m => m.CgvPageModule)
+  },
+  {
+    path: 'mentions',
+    loadChildren: () => import('./pages/mentions/mentions.module').then( m => m.MentionsPageModule)
   }
 ];
 @NgModule({

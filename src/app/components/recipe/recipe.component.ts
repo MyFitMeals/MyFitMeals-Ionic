@@ -153,8 +153,5 @@ deleteRecipe()
           this.presentToast('Recette supprimée avec succès !');
         })
     })
-  
-
-  
 }
 }

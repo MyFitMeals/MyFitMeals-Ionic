@@ -38,7 +38,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
     "codelyzer": "^5.1.2",
-    "cordova-android": "8.1.0",
+    "cordova-android": "^8.1.0",
     "cordova-browser": "^6.0.0",
     "cordova-plugin-advanced-http": "^2.5.1",
     "cordova-plugin-device": "^2.0.2",
@@ -77,14 +77,12 @@
       },
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-whitelist": {},
-      "cordova-plugin-advanced-http": {
-        "OKHTTP_VERSION": "3.10.0"
-      },
+      "cordova-plugin-advanced-http": {},
       "cordova-sqlite-storage": {}
     },
     "platforms": [
-      "android",
-      "browser"
+      "browser",
+      "android"
     ]
   }
 }

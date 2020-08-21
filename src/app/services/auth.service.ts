@@ -23,6 +23,7 @@ export class AuthService {
   user = null;
   authenticationState = new BehaviorSubject(false);
   favorites;
+  token;
  
   constructor(private http: HttpClient, private helper: JwtHelperService, private storage: Storage,
     private plt: Platform, private alertController: AlertController, private httpNative: HTTP, private loadingCtrl: LoadingController) {
@@ -30,10 +31,13 @@ export class AuthService {
       this.checkToken();
     });
   }
+  
  
   checkToken() {
     this.storage.get(TOKEN_KEY).then(token => {
       if (token) {
+        console.log(token);
+        this.token = token;
         let decoded = this.helper.decodeToken(token);
         let isExpired = this.helper.isTokenExpired(token);
  
@@ -46,18 +50,45 @@ export class AuthService {
       }
     });
   }
+
+  getToken(token)
+  {
+    let splitted = token.split(':')[1];
+    let spl2 = splitted.substring(1);
+    console.log(spl2.substring(0, (spl2.length - 3)))
+    return spl2.substring(0, (spl2.length - 3));
+  }
+
  
-  register(credentials) {
-    return this.http.post(`${this.url}/users/register`, credentials).pipe(
+   register(credentials) {
+     return this.http.post(`${this.url}/users/register`, credentials).pipe(
       catchError(e => {
         this.showAlert(e.error.msg);
         throw new Error(e);
       })
     );
-  }
+   } 
+/*     if(this.plt.is('cordova')) {
+      return this.postHttpNative(`${this.url}/users/register`, credentials).pipe(
+        catchError(e => {
+          this.showAlert(e.error.msg);
+          throw new Error(e);
+        })
+      )
+    }
+
+    else {
+      return this.postHttp(`${this.url}/users/register`, credentials).pipe(
+        catchError(e => {
+          this.showAlert(e.error.msg);
+          throw new Error(e);
+        })
+      )
+    }
+  } */
  
   login(credentials) {
-    return this.http.post(`${this.url}/users/login`, credentials)
+     return this.http.post(`${this.url}/users/login`, credentials)
       .pipe(
         tap(res => {
           this.storage.set(TOKEN_KEY, res['token']);
@@ -69,6 +100,41 @@ export class AuthService {
           throw new Error(e);
         })
       );
+
+/*       if(this.plt.is('cordova')) {
+        return this.postHttpNative(`${this.url}/users/login`, credentials).pipe(
+          tap(res => {
+            console.log(res);
+            console.log(JSON.parse(res.data));
+            this.token = JSON.parse(res.data)['token'];
+            this.storage.set(TOKEN_KEY, JSON.parse(res.data)['token']);
+            this.user = this.helper.decodeToken(JSON.parse(res.data)['token']);
+            this.authenticationState.next(true);
+          }),
+          catchError(e => {
+            console.log(e);
+            this.showAlert(e.error.msg);
+            throw new Error(e);
+          })
+        )
+      }
+  
+      else {
+        return this.postHttp(`${this.url}/users/login`, credentials).pipe(
+          tap(res => {
+            console.log(res);
+            console.log(res['token'])
+            this.storage.set(TOKEN_KEY, res['token']);
+            this.user = this.helper.decodeToken(res['token']);
+            this.authenticationState.next(true);
+          }),
+          catchError(e => {
+            console.log(e);
+            this.showAlert(e.error.msg);
+            throw new Error(e);
+          })
+        )
+      } */
   }
  
   logout() {
@@ -82,7 +148,7 @@ export class AuthService {
       catchError(e => {
         let status = e.status;
         if (status === 401) {
-          this.showAlert('You are not authorized for this!');
+          this.showAlert('Vous n\'êtes pas authentifié !');
           this.logout();
         }
         throw new Error(e);
@@ -96,7 +162,7 @@ export class AuthService {
       catchError(e => {
         let status = e.status;
         if (status === 401) {
-          this.showAlert('You are not authorized for this!');
+          this.showAlert('Vous n\'êtes pas authentifié !');
           this.logout();
         }
         throw new Error(e);
@@ -114,7 +180,7 @@ export class AuthService {
         let status = e.status;
         console.log(status);
         if (status === 401) {
-          this.showAlert('You are not authorized for this!');
+          this.showAlert('Vous n\'êtes pas authentifié !');
           this.logout();
         }
         throw new Error(e);
@@ -129,7 +195,7 @@ export class AuthService {
         let status = e.status;
         console.log(status);
         if (status === 401) {
-          this.showAlert('You are not authorized for this!');
+          this.showAlert('Vous n\'êtes pas authentifié !');
           this.logout();
         }
         throw new Error(e);
@@ -139,11 +205,12 @@ export class AuthService {
 
   getAllRecipes()
   {
+    console.log('inside getAllRecipes');
     return this.http.get(`${this.url}/users/recipes`).pipe(
       catchError(e => {
         let status = e.status;
         if (status === 401) {
-          this.showAlert('You are not authorized for this!');
+          this.showAlert('Vous n\'êtes pas authentifié !');
           this.logout();
         }
         throw new Error(e);
@@ -151,22 +218,22 @@ export class AuthService {
     )
   }
 
-  async loadFavorites() {
-    let favorites;
-
-    if(this.plt.is('cordova')) {
-      await this.getHttpNative(`${this.url}/users/recipes`).then(data => {
-        console.log(data);
-        this.favorites = JSON.parse(data.data);
+   loadFavorites() {
+    return this.http.get(`${this.url}/users/recipes`).pipe(
+      catchError(e => {
+        let status = e.status;
+        if (status === 401) {
+          this.showAlert('Vous n\'êtes pas authentifié !');
+          this.logout();
+        }
+        throw new Error(e);
       })
-    }
+    )
+  }
 
-    else {
-       await this.getHttp(`${this.url}/users/recipes`).then(data => {
-        console.log(data);
-        this.favorites = data;
-      })
-    }
+  setFavorites(favorites)
+  {
+    this.favorites = favorites;
   }
 
   getFavorites(): Recipe[]
@@ -189,7 +256,7 @@ export class AuthService {
   showAlert(msg) {
     let alert = this.alertController.create({
       message: msg,
-      header: 'Error',
+      header: 'Erreur',
       buttons: ['OK']
     });
     alert.then(alert => alert.present());
@@ -199,17 +266,36 @@ export class AuthService {
   getHttp(ApiURL) {
     console.log('calling standard Http')
 
-     return this.http.get(ApiURL).toPromise();
+     return this.http.get(ApiURL);
   }
 
    getHttpNative(ApiURL) {
     console.log('Calling Native Http')
-
+    console.log(this.token);
     let nativeCall = this.httpNative.get(ApiURL, {}, {
+      'Content-Type': 'application/json',
+      'auth': this.token
+    });
+    return from(nativeCall).pipe(
+      );
+     
+
+  }
+
+  postHttp(ApiURL, credentials) {
+    console.log('calling standard POST Http')
+
+     return this.http.post(ApiURL, credentials);
+  }
+
+   postHttpNative(ApiURL, credentials) {
+    console.log('Calling Native POST Http')
+
+    let nativeCall = this.httpNative.post(ApiURL,credentials, {
       'Content-Type': 'application/json'
     });
 
     return from(nativeCall).pipe(
-    ).toPromise();
+    );
   }
 }

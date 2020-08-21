@@ -70,9 +70,15 @@ export class FavoritesService {
 
   async loadFavorites() {
     
-    await this.authService.loadFavorites();
-    this.favorites = this.authService.getFavorites();
-    console.log(this.favorites);
+    this.authService.loadFavorites().subscribe(result =>
+      {
+        console.log(result);
+        this.authService.setFavorites(result);
+        this.favorites = this.authService.getFavorites();
+        console.log(this.favorites);
+      })
+    
+    
   }
 
   getFavorites(): Recipe[]
