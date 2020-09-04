@@ -26,8 +26,8 @@ export class Tab3Page {
 
   loadInformations() {
     this.authService.getInformations().subscribe(res => {
-      this.firstName = res['firstName'];
-      this.lastName = res['lastName'];
+      this.firstName = res['user']['firstName'];
+      this.lastName = res['user']['lastName'];
     });
   }
 

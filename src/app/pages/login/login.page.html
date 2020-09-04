@@ -1,30 +1,32 @@
-<ion-header mode = "ios" translucent>
-  <ion-toolbar mode = "ios" color="danger">
-    <ion-title>Me connecter</ion-title>
-  </ion-toolbar>
-</ion-header>
+
 
 <ion-content padding class="background">
 
   <!-- <ion-img [src]="item.src"></ion-img> -->
-   <img src = "../../../assets/niklas-rhose-FlmXvqlD-nI-unsplash-1@3x.png" /> 
+   <!-- <img src = "../../../assets/niklas-rhose-FlmXvqlD-nI-unsplash-1@3x.png" />  -->
 
-   <h1 style = "text-align: center;">MyFitMeals</h1>
+   <h1 id = "logo">MyFitMeals</h1>
     <form [formGroup]="credentialsForm" (ngSubmit)="onSubmit()" class = "loginForm">
  
-      <ion-item mode = "ios">
-        <ion-label position="floating">Email</ion-label>
-        <ion-input type="email" formControlName="email"></ion-input>
+      <ion-item mode = "ios" color = "transparent">
+        <ion-label position="floating" color = "light">
+          <ion-icon name="person-circle-outline" style = "color: #FF4757;"></ion-icon>
+          Email</ion-label>
+        <ion-input type="email" formControlName="email" color = "light"></ion-input>
       </ion-item>
    
-      <ion-item mode = "ios">
-        <ion-label position="floating">Mot de passe</ion-label>
-        <ion-input type="password" formControlName="password"></ion-input>
+      <ion-item mode = "ios" color = "transparent">
+        <ion-label position="floating" color = "light">
+          <ion-icon name="lock-closed-outline" style = "color: #FF4757;"></ion-icon>
+          Mot de passe</ion-label>
+        <ion-input type="password" formControlName="password" color = "light"></ion-input>
       </ion-item>
    
-      <ion-button mode = "ios" expand="full" color="danger" type="submit" [disabled]="!credentialsForm.valid">Me connecter</ion-button>
-      <a mode = "ios" type="button" [routerLink] = "['/register']">Créer un compte</a>
-      <!-- <ion-button expand="full" type="button" (click)="register()" [disabled]="!credentialsForm.valid">Register</ion-button> -->
+      <div class = "loginButtons">
+        <ion-button id = "logButton" mode = "ios" expand="block" color="danger" type="submit">Me connecter</ion-button>
+        <a mode = "ios" type="button" [routerLink] = "['/register']" style = "color: white">Créer un compte</a>
+      </div>
+
    
     </form>
 

@@ -7,11 +7,18 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content mode = 'ios'>
   <div class = "sousHeader">
     <img src = "../../../assets/niklas-rhose-FlmXvqlD-nI-unsplash-1@3x.png">
     <ion-button expand="block" (click)="showPicker()">Sélectionnez un sujet</ion-button>
   </div>
+  
+  <div *ngIf = 'subjectSelected' class = 'subject'>
+    <ion-text color = 'primary'>
+      <h3>{{subject}}</h3>
+    </ion-text>
+  </div>
+
 
   <form [formGroup]="contactUsForm" (ngSubmit)="onSubmit()" class = "loginForm">
  

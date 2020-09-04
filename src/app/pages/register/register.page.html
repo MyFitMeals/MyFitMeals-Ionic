@@ -1,42 +1,49 @@
-<ion-header mode = "ios">
-  <ion-toolbar mode = "ios" color="danger">
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>Inscription</ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content padding>
+
+<ion-content padding class = "background">
 
   <!-- <ion-img [src]="item.src"></ion-img> -->
-  <img src = "../../../assets/niklas-rhose-FlmXvqlD-nI-unsplash-1@3x.png" />
+  <!-- <img src = "../../../assets/niklas-rhose-FlmXvqlD-nI-unsplash-1@3x.png" /> -->
 
   
+    <h1 id = "logo">MyFitMeals</h1>
+
     <form [formGroup]="credentialsForm" (ngSubmit)="onSubmit()" class = "loginForm">
  
-      <ion-item mode = "ios">
-        <ion-label position="floating">Email</ion-label>
-        <ion-input type="email" formControlName="email"></ion-input>
+      <ion-item mode = "ios" color = "transparent">
+        <ion-label position="floating" color = "primary">
+          <ion-icon name="person-circle-outline" style = "color: #FF4757;"></ion-icon>
+          Email</ion-label>
+        <ion-input type="email" formControlName="email" color = "primary"></ion-input>
       </ion-item>
    
-      <ion-item mode = "ios">
-        <ion-label position="floating">Mot de passe</ion-label>
-        <ion-input type="password" formControlName="password"></ion-input>
+      <ion-item mode = "ios" color = "transparent">
+        <ion-label position="floating" color = "primary">
+          <ion-icon name="lock-closed-outline" style = "color: #FF4757;"></ion-icon>
+          Mot de passe</ion-label>
+        <ion-input type="password" formControlName="password" color = "primary"></ion-input>
       </ion-item>
 
-      <ion-item mode = "ios">
-        <ion-label position="floating">Prénom</ion-label>
-        <ion-input type="text" formControlName="firstName"></ion-input>
+      <ion-item mode = "ios" color = "transparent">
+        <ion-label position="floating" color = "primary">
+          <ion-icon name="person-outline" style = "color: #FF4757;"></ion-icon>
+          Prénom</ion-label>
+        <ion-input type="text" formControlName="firstName" color = "primary"></ion-input>
       </ion-item>
 
-      <ion-item mode = "ios">
-        <ion-label position="floating">Nom</ion-label>
-        <ion-input type="text" formControlName="lastName"></ion-input>
+      <ion-item mode = "ios" color = "transparent">
+        <ion-label position="floating" color = "primary">
+          <ion-icon name="person-outline" style = "color: #FF4757;"></ion-icon>
+          Nom</ion-label>
+        <ion-input type="text" formControlName="lastName" color = "primary"></ion-input>
       </ion-item>
+
+      <div class = "loginButtons">
+        <ion-button mode = "ios" id = "logButton" expand="block" color="danger" type="submit" >Créer mon compte</ion-button>
+        <a mode = "ios" type="button" [routerLink] = "['/login']" style = "color: black">Me connecter</a>
+      </div>
    
-      <ion-button mode = "ios" expand="full" color="danger" type="submit" [disabled]="!credentialsForm.valid">Créer mon compte</ion-button>
-      <a mode = "ios" type="button" [routerLink] = "['/register']">Me connecter</a>
+
       <!-- <ion-button expand="full" type="button" (click)="register()" [disabled]="!credentialsForm.valid">Register</ion-button> -->
    
     </form>

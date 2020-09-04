@@ -1,13 +1,31 @@
 
 
-.login
+.background
 {
-    background-image: url('../../../assets/niklas-rhose-FlmXvqlD-nI-unsplash-1@3x.png');
-    background-size: cover;
-    text-align: center;
+    //background-image: url('../../../assets/background.png');
+    --background: #fff url('../../../assets/backgroundRegister.png') no-repeat center center / cover;
 }
 
 .loginForm
 {
     text-align: center;
+    padding: 0.7em;
+    margin-top: 2em;
+
+}
+
+.loginButtons
+{
+    margin-top: 3em;
+}
+
+.loginButtons #logButton {
+    margin-bottom: 1em;
+}
+
+#logo
+{
+    margin-top: 5em;
+    
+    text-align: center; 
 }

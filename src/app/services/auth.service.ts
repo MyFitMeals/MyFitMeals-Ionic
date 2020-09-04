@@ -63,6 +63,7 @@ export class AuthService {
    register(credentials) {
      return this.http.post(`${this.url}/users/register`, credentials).pipe(
       catchError(e => {
+        console.log(e.error.msg);
         this.showAlert(e.error.msg);
         throw new Error(e);
       })
@@ -93,7 +94,11 @@ export class AuthService {
         tap(res => {
           this.storage.set(TOKEN_KEY, res['token']);
           this.user = this.helper.decodeToken(res['token']);
-          this.authenticationState.next(true);
+          if(this.user.paidStatus === false)
+          {
+            this.showAlert('Vous n\'êtes pas abonné à l\'application !');
+          }
+          else this.authenticationState.next(true);
         }),
         catchError(e => {
           this.showAlert(e.error.msg);

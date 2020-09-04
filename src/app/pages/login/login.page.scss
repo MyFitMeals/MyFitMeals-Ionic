@@ -1,11 +1,37 @@
 
 
-ion-content {
-    /* --ion-background: url('../../../assets/background.png'); */
-    /* --ion-background-color: #f5af19; */
+/* ion-content {
+     --ion-background: url('../../../assets/background.png'); 
+     --ion-background-color: #f5af19; 
+} */
+
+.background
+{
+    //background-image: url('../../../assets/background.png');
+    --background: #fff url('../../../assets/background\ -\ Copy.png') no-repeat center center / cover;
 }
 
 .loginForm
 {
     text-align: center;
+    padding: 0.7em;
+    margin-top: 2em;
+
+}
+
+.loginButtons
+{
+    margin-top: 3em;
+}
+
+.loginButtons #logButton {
+    margin-bottom: 1em;
+}
+
+#logo
+{
+    margin-top: 5em;
+    
+    text-align: center; 
+    color: white;
 }

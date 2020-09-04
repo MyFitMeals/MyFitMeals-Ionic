@@ -11,12 +11,14 @@ import { PickerOptions } from "@ionic/core";
   styleUrls: ['./contact-us.page.scss'],
 })
 export class ContactUsPage implements OnInit {
-  animals: string[] = [
+  subjects: string[] = [
     "Problème de paiement",
     "Problème de compte",
     "Problème de recette"
   ];
 
+  subjectSelected: boolean = false;
+  subject;
   contactUsForm: FormGroup;
 
   constructor(private pickerController: PickerController, private router: Router, 
@@ -35,29 +37,31 @@ export class ContactUsPage implements OnInit {
     let options: PickerOptions = {
       buttons: [
         {
-          text: "Cancel",
+          text: "Annuler",
           role: 'cancel'
         },
         {
           text:'Ok',
           handler:(value:any) => {
+            this.subjectSelected = true;
+            this.subject = value.Subjects.text;
             console.log(value);
           }
         }
       ],
       columns:[{
-        name:'Animals',
+        name:'Subjects',
         options:this.getColumnOptions()
       }]
     };
 
     let picker = await this.pickerController.create(options);
-    picker.present()
+    picker.present().then(res => console.log(res));
   }
 
   getColumnOptions(){
     let options = [];
-    this.animals.forEach(x => {
+    this.subjects.forEach(x => {
       options.push({text:x,value:x});
     });
     return options;
