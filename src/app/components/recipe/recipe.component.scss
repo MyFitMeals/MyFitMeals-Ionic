@@ -1,3 +1,7 @@
+*{
+    color: #2F3542;
+}
+
 #recipeName
 {
     font-size: 20px;
@@ -17,6 +21,13 @@
     text-align: center;
     padding: 2%;
     margin-bottom: 1em;
+}
+
+.underline
+{
+    height: 8px;
+    width: 150px;
+    margin: 15px 0;
 }
 
 #proteins

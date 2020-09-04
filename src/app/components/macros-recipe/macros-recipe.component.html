@@ -1,5 +1,5 @@
 <ion-item mode ="ios" lines = "none">
-  <div class = "macronutriments">
+<!--   <div class = "macronutriments">
     <div id = "proteins" class = "macros">
       
       <span class = "macrosInfos">{{getRecipe()?.proteins}}g</span>
@@ -17,8 +17,32 @@
       <br>
       <span>Lipides</span>
     </div>
-  </div>
+  </div> -->
 
+
+  <div class = "macrosGrid">
+    <div class = "macro">
+      <span class = "macroValue">{{getRecipe()?.proteins}}g</span>
+      <br>
+      <span class = "macroName">Protéines</span>
+    </div>
+
+    <div class = "verticalBar"></div>
+
+    <div class = "macro">
+      <span class = "macroValue">{{getRecipe()?.carbs}}g</span>
+      <br>
+      <span class = "macroName">Glucides</span>
+    </div>
+
+    <div class = "verticalBar"></div>
+
+    <div class = "macro">
+      <span class = "macroValue">{{getRecipe()?.fats}}g</span>
+      <br>
+      <span class = "macroName">Lipides</span>
+    </div>
+  </div>
 
 
 
