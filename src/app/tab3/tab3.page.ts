@@ -18,12 +18,6 @@ export class Tab3Page {
       this.loadInformations();
     }
 
-
-  getFavorites()
-  {
-    return this.favoritesService.getFavorites();
-  }
-
   loadInformations() {
     this.authService.getInformations().subscribe(res => {
       this.firstName = res['user']['firstName'];

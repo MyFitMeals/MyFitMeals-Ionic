@@ -19,7 +19,7 @@ export class FavoritesService {
     
     this.favorites.push(recipe);
     this.addRecipe(recipe);
-    this.storage.set('favorites', this.favorites);
+    this.storage.set('favorites', this.favorites[0].name);
   }
 
   removeFavorite(recipe: Recipe)
