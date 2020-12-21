@@ -44,6 +44,10 @@ const routes: Routes = [
   {
     path: 'mentions',
     loadChildren: () => import('./pages/mentions/mentions.module').then( m => m.MentionsPageModule)
+  },
+  {
+    path: 'sliders',
+    loadChildren: () => import('./sliders/sliders.module').then( m => m.SlidersPageModule)
   }
 ];
 @NgModule({

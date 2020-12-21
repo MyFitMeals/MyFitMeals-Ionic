@@ -5,6 +5,7 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,8 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private storage: Storage
   ) {
     this.initializeApp();
   }
@@ -31,15 +33,27 @@ export class AppComponent {
         if(state) {
           this.router.navigate(['tabs']);
         } else {
+          console.log(state);
           this.router.navigate(['login']);
         }
       })
 
-      this.auth.registerState.subscribe(state => {
+        this.auth.registerState.subscribe(state => {
         if(state) {
           this.router.navigate(['macros-calculator']);
         } else {
           this.router.navigate(['register']);
+        }
+      })
+      
+      this.storage.get('firstTime').then(value => {
+        if(value) {
+          console.log(value)
+        }
+        else {
+          console.log('out');
+          this.storage.set('firstTime', 'true');
+          this.router.navigate(['sliders']);
         }
       })
     });
