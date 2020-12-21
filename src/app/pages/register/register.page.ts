@@ -26,7 +26,7 @@ export class RegisterPage implements OnInit {
   onSubmit() {
     this.authService.register(this.credentialsForm.value).subscribe(res => {
       // Call Login to automatically login the new user
-      this.authService.login(this.credentialsForm.value).subscribe();
+      this.authService.loginAfterRegister(this.credentialsForm.value).subscribe();
     });
   }
 

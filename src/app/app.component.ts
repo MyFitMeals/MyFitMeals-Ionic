@@ -34,6 +34,14 @@ export class AppComponent {
           this.router.navigate(['login']);
         }
       })
+
+      this.auth.registerState.subscribe(state => {
+        if(state) {
+          this.router.navigate(['macros-calculator']);
+        } else {
+          this.router.navigate(['register']);
+        }
+      })
     });
   }
 }

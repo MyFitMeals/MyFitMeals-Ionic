@@ -15,6 +15,7 @@ export class MacrosComponent implements OnInit {
   private carbs: number;
   private fats: number;
   macrosForm: FormGroup;
+  valueSegment;
   
 
   constructor(private macroService : MacrosService, private popOverController: PopoverController,
@@ -26,6 +27,7 @@ export class MacrosComponent implements OnInit {
       carbs: ['', [Validators.required]],
       fats: ['', [Validators.required]]
     });
+    this.valueSegment = "proteins";
   }
 
 
@@ -66,6 +68,63 @@ export class MacrosComponent implements OnInit {
   resetMacros()
   {
     this.macroService.resetMacros();
+  }
+
+
+  incrementProteins() {
+    if(!this.proteins) {
+      this.proteins = 0;
+    }
+    this.proteins = this.proteins + 1;
+  }
+
+  decrementProteins() {
+    if(!this.proteins) {
+      this.proteins = 1;
+    }
+    if(this.proteins > 0) {
+      this.proteins = this.proteins - 1;
+    }
+  }
+
+  incrementCarbs() {
+    if(!this.carbs) {
+      this.carbs = 0;
+    }
+    this.carbs = this.carbs + 1;
+  }
+
+  decrementCarbs() {
+    if(!this.carbs) {
+      this.carbs = 1;
+    }
+    if(this.carbs > 0) {
+      this.carbs = this.carbs - 1;
+    }
+  }
+
+  incrementFats() {
+    if(!this.fats) {
+      this.fats = 0;
+    }
+    this.fats = this.fats + 1;
+  }
+
+  decrementFats() {
+    if(!this.fats) {
+      this.fats = 1;
+    }
+    if(this.fats > 0) {
+      this.fats = this.fats - 1;
+    }
+  }
+
+  formValid(): boolean {
+    if(this.proteins && this.carbs && this.fats) {
+      return true;
+    }
+
+    else return false;
   }
 
 }

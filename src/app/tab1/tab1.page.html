@@ -1,8 +1,17 @@
 <app-header></app-header>
 
 <ion-content>
+  <ion-toolbar>
+    <ion-searchbar mode = "ios" color="danger" showCancelButton="never" (ionInput)="filterList($event)"></ion-searchbar>
+    <ion-buttons slot="end">
+      <ion-button id="changeText"  (click) = "presentPopover($event)">
+        <ion-icon slot="start" name="apps-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+ 
 
-  <div class = "recipesFilters">
+<!--   <div class = "recipesFilters">
 
     <ion-chip outline = "true" color = "primary" [ngStyle] = "{'visibility': proteinFiltered? 'inherit':'hidden'}">
       <ion-label>P {{getProteins()}}</ion-label>
@@ -17,18 +26,9 @@
     </ion-chip>
 
     <ion-chip mode = "ios" color = "danger" (click) = "presentPopover($event)">
-      Filtrer par macros
+      <ion-icon name="apps-outline"></ion-icon>
     </ion-chip>
-
-<!--     <ion-chip outline = "true" color = "primary">
-      <ion-select placeholder="Trier par..">
-        <ion-select-option value="date">Date de parution <ion-icon name="pizza-outline"></ion-icon></ion-select-option>
-        <ion-select-option value="protein">Fort en protéines</ion-select-option>
-        <ion-select-option value="carbs">Fort en glucides</ion-select-option>
-        <ion-select-option value="fats">Fort en lipides</ion-select-option>
-      </ion-select>
-    </ion-chip> -->
-  </div>
+  </div> -->
 
   <!-- <app-macronutriments></app-macronutriments> -->
 

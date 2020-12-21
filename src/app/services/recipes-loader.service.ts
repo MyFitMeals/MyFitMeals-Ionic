@@ -39,4 +39,15 @@ export class RecipesLoaderService {
     )
 
   }
+
+  filterBySearch(searchTerm) {
+    this.loadRecipes().then(result => {
+      this.recipes = this.recipes.filter(currentRecipe => {
+        if (currentRecipe.name && searchTerm) {
+          return (currentRecipe.name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);
+        }
+      });
+    })
+
+  }
 }

@@ -33,25 +33,103 @@
     </ion-col>
   </ion-row> -->
 
-  <form [formGroup]="macrosForm" (ngSubmit)="onSubmit()">
- 
-    <ion-item mode = "ios">
-      <ion-label position="floating">Protéines</ion-label>
-      <ion-input type = "number" name = "proteins" formControlName="proteins" (input)="setQuantity('proteins', $event.target.value)"></ion-input>
-    </ion-item>
+  <ion-content class = "popover-content">
 
- 
-    <ion-item mode = "ios">
-      <ion-label position="floating">Glucides</ion-label>
-      <ion-input type = "number" name = "carbs" formControlName="carbs" (input)="setQuantity('carbs', $event.target.value)"></ion-input>
-    </ion-item>
+    <div class = "features">
+      <ion-segment color = "danger" [(ngModel)] = "valueSegment" mode = "ios">
+        <ion-segment-button value="carbs">
+          <ion-label>Glucides</ion-label>
+        </ion-segment-button>
+  
+        <ion-segment-button value="proteins">
+          <ion-label>Protéines</ion-label>
+        </ion-segment-button>
+  
+        <ion-segment-button value="fats">
+          <ion-label>Lipides</ion-label>
+        </ion-segment-button>
+  
+  <!--       <ion-segment-button value="Conseils">
+          <ion-label>Conseils</ion-label>
+        </ion-segment-button> -->
+      </ion-segment>
+    </div>
 
-    <ion-item mode = "ios">
-      <ion-label position="floating">Lipides</ion-label>
-      <ion-input type = "number" name = "fats" formControlName="fats" (input)="setQuantity('fats', $event.target.value)"></ion-input>
-    </ion-item>
- 
-    <ion-button mode = "ios" type = "submit" style="font-size: 20px; margin-left: 10px;" [disabled]="!macrosForm.valid">Valider</ion-button>
-    <ion-button mode = "ios" color = "danger" (click) = "resetMacros()">Reset</ion-button>
+    <div [ngSwitch] = "valueSegment">
+      <ion-list mode ="ios" *ngSwitchCase = "'proteins'" inset ="true">
+        <ion-row class = "macroInput">
+          <ion-button mode = "ios"  fill = "clear" expand = "full"  (click) = "decrementProteins()">
+            <ion-icon name="remove-circle" ></ion-icon>
+          </ion-button>
+          
+          <ion-input type="number" id="your-input" placeholder = "20" min = "0" max = "100" [(ngModel)]="proteins" (input)="setQuantity('proteins', $event.target.value)"></ion-input>
+          <h1>g</h1>
+          <ion-button mode = "ios"  fill = "clear" expand = "full"  (click) = "incrementProteins()">
+            <ion-icon name="add-circle"></ion-icon>
+          </ion-button>
+          
+          </ion-row>
+        
+        </ion-list>
 
-  </form>
+        <ion-list mode ="ios" *ngSwitchCase = "'carbs'" inset ="true">
+          <ion-row class = "macroInput">
+            <ion-button mode = "ios"  fill = "clear" expand = "full"  (click) = "decrementCarbs()">
+              <ion-icon name="remove-circle" ></ion-icon>
+            </ion-button>
+            
+            <ion-input type="number" id="your-input" placeholder = "20" min = "0" max = "100" [(ngModel)]="carbs" (input)="setQuantity('carbs', $event.target.value)"></ion-input>
+            <h1>g</h1>
+            <ion-button mode = "ios"  fill = "clear" expand = "full"  (click) = "incrementCarbs()">
+              <ion-icon name="add-circle"></ion-icon>
+            </ion-button>
+            
+            </ion-row>
+          
+          </ion-list>
+
+          <ion-list mode ="ios" *ngSwitchCase = "'fats'" inset ="true">
+            <ion-row class = "macroInput">
+              <ion-button mode = "ios"  fill = "clear" expand = "full"  (click) = "decrementFats()">
+                <ion-icon name="remove-circle" ></ion-icon>
+              </ion-button>
+              
+              <ion-input type="number" id="your-input" placeholder = "20" min = "0" max = "100" [(ngModel)]="fats" (input)="setQuantity('fats', $event.target.value)"></ion-input>
+              <h1>g</h1>
+              <ion-button mode = "ios"  fill = "clear" expand = "full"  (click) = "incrementFats()">
+                <ion-icon name="add-circle"></ion-icon>
+              </ion-button>
+              
+              </ion-row>
+            
+            </ion-list>
+
+        </div>
+
+        <ion-button mode = "ios" color = "danger" (click) = "resetMacros()">Réinitialiser</ion-button>
+        <ion-button mode = "ios" (click) ="onSubmit()"  style="margin-right: 10px;" [disabled]="!formValid()">Valider</ion-button>
+        
+
+<!--     <form [formGroup]="macrosForm" (ngSubmit)="onSubmit()" >
+ 
+      <ion-item mode = "ios">
+        <ion-label position="floating">Protéines</ion-label>
+        <ion-input type = "number" name = "proteins" formControlName="proteins" (input)="setQuantity('proteins', $event.target.value)"></ion-input>
+      </ion-item>
+  
+   
+      <ion-item mode = "ios">
+        <ion-label position="floating">Glucides</ion-label>
+        <ion-input type = "number" name = "carbs" formControlName="carbs" (input)="setQuantity('carbs', $event.target.value)"></ion-input>
+      </ion-item>
+  
+      <ion-item mode = "ios">
+        <ion-label position="floating">Lipides</ion-label>
+        <ion-input type = "number" name = "fats" formControlName="fats" (input)="setQuantity('fats', $event.target.value)"></ion-input>
+      </ion-item>
+   
+
+  
+    </form> -->
+  
+  </ion-content>

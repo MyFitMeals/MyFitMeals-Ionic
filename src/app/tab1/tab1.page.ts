@@ -41,6 +41,18 @@ export class Tab1Page {
       });
     let loading = this.presentLoading();
   } */
+
+  async filterList(evt) {
+    //this.recipesLoder. = this.foodListBackup;
+    const searchTerm = evt.srcElement.value;
+  
+    if (!searchTerm) {
+      console.log('empty');
+      this.recipesLoder.loadRecipes();
+    }
+
+    else  this.recipesLoder.filterBySearch(searchTerm);
+  }
   
 
   async loadRecipes() {

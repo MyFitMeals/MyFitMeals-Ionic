@@ -1,6 +1,7 @@
 import { AuthService } from './auth.service';
 import { Recipe } from './../models/recipe';
 import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -8,15 +9,17 @@ import { Injectable } from '@angular/core';
 export class FavoritesService {
 
   favorites: Recipe[];
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private storage: Storage) {
     this.favorites = [];
     console.log('I am in favorites services');
    }
 
   addFavorite(recipe: Recipe)
   {
+    
     this.favorites.push(recipe);
     this.addRecipe(recipe);
+    this.storage.set('favorites', this.favorites);
   }
 
   removeFavorite(recipe: Recipe)
@@ -83,6 +86,15 @@ export class FavoritesService {
 
   getFavorites(): Recipe[]
   {
+    let temp;
+    this.storage.get('favorites').then((res) => {
+      if(res) {
+        console.log(res);
+        temp = res;
+      }
+    })
+    console.log('THIS IS FAVORITESTEMP');
+    console.log(temp);
     return this.favorites;
   }
 }

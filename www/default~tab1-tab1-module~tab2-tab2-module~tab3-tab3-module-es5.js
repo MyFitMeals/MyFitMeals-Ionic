@@ -81,7 +81,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-item mode =\"ios\" lines = \"none\">\n  <div class = \"macronutriments\">\n    <div id = \"proteins\" class = \"macros\">\n      \n      <span class = \"macrosInfos\">{{getRecipe()?.proteins}}g</span>\n      <br>\n      <span>Protéines</span>\n    </div>\n    <div id = \"carbs\" class = \"macros\">\n      <span class = \"macrosInfos\">{{getRecipe()?.carbs}}g</span>\n      <br>\n      <span>Glucides</span>\n    </div>\n\n    <div id = \"fats\" class = \"macros\">\n      <span class = \"macrosInfos\">{{getRecipe()?.fats}}g</span>\n      <br>\n      <span>Lipides</span>\n    </div>\n  </div>\n\n\n\n\n</ion-item>";
+    __webpack_exports__["default"] = "<ion-item mode =\"ios\" lines = \"none\">\n<!--   <div class = \"macronutriments\">\n    <div id = \"proteins\" class = \"macros\">\n      \n      <span class = \"macrosInfos\">{{getRecipe()?.proteins}}g</span>\n      <br>\n      <span>Protéines</span>\n    </div>\n    <div id = \"carbs\" class = \"macros\">\n      <span class = \"macrosInfos\">{{getRecipe()?.carbs}}g</span>\n      <br>\n      <span>Glucides</span>\n    </div>\n\n    <div id = \"fats\" class = \"macros\">\n      <span class = \"macrosInfos\">{{getRecipe()?.fats}}g</span>\n      <br>\n      <span>Lipides</span>\n    </div>\n  </div> -->\n\n\n  <div class = \"macrosGrid\">\n    <div class = \"macro\">\n      <span class = \"macroValue\">{{getRecipe()?.proteins}}g</span>\n      <br>\n      <span class = \"macroName\">Protéines</span>\n    </div>\n\n    <div class = \"verticalBar\"></div>\n\n    <div class = \"macro\">\n      <span class = \"macroValue\">{{getRecipe()?.carbs}}g</span>\n      <br>\n      <span class = \"macroName\">Glucides</span>\n    </div>\n\n    <div class = \"verticalBar\"></div>\n\n    <div class = \"macro\">\n      <span class = \"macroValue\">{{getRecipe()?.fats}}g</span>\n      <br>\n      <span class = \"macroName\">Lipides</span>\n    </div>\n  </div>\n\n\n\n</ion-item>";
     /***/
   },
 
@@ -101,7 +101,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<!-- \n\n  <ion-row>\n    <ion-col>\n      <ion-label position = \"floating\">Protéines</ion-label>\n      <ion-input type = \"number\" name = \"proteins\" (input)=\"setQuantity('proteins', $event.target.value)\"></ion-input>\n    </ion-col>\n  </ion-row>\n\n  <ion-row>\n    <ion-col>\n      <ion-label position = \"floating\">Glucides</ion-label>\n      <ion-input type = \"number\" name = \"carbs\" (input)=\"setQuantity('carbs', $event.target.value)\"></ion-input>\n    </ion-col>\n  </ion-row>\n\n  <ion-row>\n    <ion-col>\n      <ion-label position = \"floating\">Lipides</ion-label>\n      <ion-input type = \"number\" name = \"fats\" (input)=\"setQuantity('fats', $event.target.value)\"></ion-input>\n    </ion-col>\n  </ion-row>\n\n\n\n  <ion-row>\n    <ion-col>\n      <ion-button type = \"submit\" (click) = \"onSubmit()\" style=\"font-size: 20px; margin-left: 10px;\">Valider</ion-button>\n    </ion-col>\n\n    <ion-col>\n      <ion-button type = \"submit\" color = \"danger\" (click) = \"resetMacros()\">Reset</ion-button>\n    </ion-col>\n  </ion-row> -->\n\n  <form [formGroup]=\"macrosForm\" (ngSubmit)=\"onSubmit()\">\n \n    <ion-item mode = \"ios\">\n      <ion-label position=\"floating\">Protéines</ion-label>\n      <ion-input type = \"number\" name = \"proteins\" formControlName=\"proteins\" (input)=\"setQuantity('proteins', $event.target.value)\"></ion-input>\n    </ion-item>\n\n \n    <ion-item mode = \"ios\">\n      <ion-label position=\"floating\">Glucides</ion-label>\n      <ion-input type = \"number\" name = \"carbs\" formControlName=\"carbs\" (input)=\"setQuantity('carbs', $event.target.value)\"></ion-input>\n    </ion-item>\n\n    <ion-item mode = \"ios\">\n      <ion-label position=\"floating\">Lipides</ion-label>\n      <ion-input type = \"number\" name = \"fats\" formControlName=\"fats\" (input)=\"setQuantity('fats', $event.target.value)\"></ion-input>\n    </ion-item>\n \n    <ion-button mode = \"ios\" type = \"submit\" style=\"font-size: 20px; margin-left: 10px;\" [disabled]=\"!macrosForm.valid\">Valider</ion-button>\n    <ion-button mode = \"ios\" color = \"danger\" (click) = \"resetMacros()\">Reset</ion-button>\n\n  </form>\n";
+    __webpack_exports__["default"] = "<!-- \n\n  <ion-row>\n    <ion-col>\n      <ion-label position = \"floating\">Protéines</ion-label>\n      <ion-input type = \"number\" name = \"proteins\" (input)=\"setQuantity('proteins', $event.target.value)\"></ion-input>\n    </ion-col>\n  </ion-row>\n\n  <ion-row>\n    <ion-col>\n      <ion-label position = \"floating\">Glucides</ion-label>\n      <ion-input type = \"number\" name = \"carbs\" (input)=\"setQuantity('carbs', $event.target.value)\"></ion-input>\n    </ion-col>\n  </ion-row>\n\n  <ion-row>\n    <ion-col>\n      <ion-label position = \"floating\">Lipides</ion-label>\n      <ion-input type = \"number\" name = \"fats\" (input)=\"setQuantity('fats', $event.target.value)\"></ion-input>\n    </ion-col>\n  </ion-row>\n\n\n\n  <ion-row>\n    <ion-col>\n      <ion-button type = \"submit\" (click) = \"onSubmit()\" style=\"font-size: 20px; margin-left: 10px;\">Valider</ion-button>\n    </ion-col>\n\n    <ion-col>\n      <ion-button type = \"submit\" color = \"danger\" (click) = \"resetMacros()\">Reset</ion-button>\n    </ion-col>\n  </ion-row> -->\n\n  <ion-content class = \"popover-content\">\n\n    <div class = \"features\">\n      <ion-segment color = \"danger\" [(ngModel)] = \"valueSegment\" mode = \"ios\">\n        <ion-segment-button value=\"carbs\">\n          <ion-label>Glucides</ion-label>\n        </ion-segment-button>\n  \n        <ion-segment-button value=\"proteins\">\n          <ion-label>Protéines</ion-label>\n        </ion-segment-button>\n  \n        <ion-segment-button value=\"fats\">\n          <ion-label>Lipides</ion-label>\n        </ion-segment-button>\n  \n  <!--       <ion-segment-button value=\"Conseils\">\n          <ion-label>Conseils</ion-label>\n        </ion-segment-button> -->\n      </ion-segment>\n    </div>\n\n    <div [ngSwitch] = \"valueSegment\">\n      <ion-list mode =\"ios\" *ngSwitchCase = \"'proteins'\" inset =\"true\">\n        <ion-row class = \"macroInput\">\n          <ion-button mode = \"ios\"  fill = \"clear\" expand = \"full\"  (click) = \"decrementProteins()\">\n            <ion-icon name=\"remove-circle\" ></ion-icon>\n          </ion-button>\n          \n          <ion-input type=\"number\" id=\"your-input\" placeholder = \"20\" min = \"0\" max = \"100\" [(ngModel)]=\"proteins\" (input)=\"setQuantity('proteins', $event.target.value)\"></ion-input>\n          <h1>g</h1>\n          <ion-button mode = \"ios\"  fill = \"clear\" expand = \"full\"  (click) = \"incrementProteins()\">\n            <ion-icon name=\"add-circle\"></ion-icon>\n          </ion-button>\n          \n          </ion-row>\n        \n        </ion-list>\n\n        <ion-list mode =\"ios\" *ngSwitchCase = \"'carbs'\" inset =\"true\">\n          <ion-row class = \"macroInput\">\n            <ion-button mode = \"ios\"  fill = \"clear\" expand = \"full\"  (click) = \"decrementCarbs()\">\n              <ion-icon name=\"remove-circle\" ></ion-icon>\n            </ion-button>\n            \n            <ion-input type=\"number\" id=\"your-input\" placeholder = \"20\" min = \"0\" max = \"100\" [(ngModel)]=\"carbs\" (input)=\"setQuantity('carbs', $event.target.value)\"></ion-input>\n            <h1>g</h1>\n            <ion-button mode = \"ios\"  fill = \"clear\" expand = \"full\"  (click) = \"incrementCarbs()\">\n              <ion-icon name=\"add-circle\"></ion-icon>\n            </ion-button>\n            \n            </ion-row>\n          \n          </ion-list>\n\n          <ion-list mode =\"ios\" *ngSwitchCase = \"'fats'\" inset =\"true\">\n            <ion-row class = \"macroInput\">\n              <ion-button mode = \"ios\"  fill = \"clear\" expand = \"full\"  (click) = \"decrementFats()\">\n                <ion-icon name=\"remove-circle\" ></ion-icon>\n              </ion-button>\n              \n              <ion-input type=\"number\" id=\"your-input\" placeholder = \"20\" min = \"0\" max = \"100\" [(ngModel)]=\"fats\" (input)=\"setQuantity('fats', $event.target.value)\"></ion-input>\n              <h1>g</h1>\n              <ion-button mode = \"ios\"  fill = \"clear\" expand = \"full\"  (click) = \"incrementFats()\">\n                <ion-icon name=\"add-circle\"></ion-icon>\n              </ion-button>\n              \n              </ion-row>\n            \n            </ion-list>\n\n        </div>\n\n        <ion-button mode = \"ios\" color = \"danger\" (click) = \"resetMacros()\">Réinitialiser</ion-button>\n        <ion-button mode = \"ios\" (click) =\"onSubmit()\"  style=\"margin-right: 10px;\" [disabled]=\"!formValid()\">Valider</ion-button>\n        \n\n<!--     <form [formGroup]=\"macrosForm\" (ngSubmit)=\"onSubmit()\" >\n \n      <ion-item mode = \"ios\">\n        <ion-label position=\"floating\">Protéines</ion-label>\n        <ion-input type = \"number\" name = \"proteins\" formControlName=\"proteins\" (input)=\"setQuantity('proteins', $event.target.value)\"></ion-input>\n      </ion-item>\n  \n   \n      <ion-item mode = \"ios\">\n        <ion-label position=\"floating\">Glucides</ion-label>\n        <ion-input type = \"number\" name = \"carbs\" formControlName=\"carbs\" (input)=\"setQuantity('carbs', $event.target.value)\"></ion-input>\n      </ion-item>\n  \n      <ion-item mode = \"ios\">\n        <ion-label position=\"floating\">Lipides</ion-label>\n        <ion-input type = \"number\" name = \"fats\" formControlName=\"fats\" (input)=\"setQuantity('fats', $event.target.value)\"></ion-input>\n      </ion-item>\n   \n\n  \n    </form> -->\n  \n  </ion-content>\n";
     /***/
   },
 
@@ -121,7 +121,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-card mode = \"ios\" class=\"myCard\" >\n  <div class =\"testOverlay\">\n    <ion-badge mode =\"ios\" color=\"light\">\n      <ion-icon name=\"flame-outline\" style = \"color: red; font-size: 16px;\"></ion-icon>\n      {{recipe.calories}} cal</ion-badge>\n  </div>\n  <ion-img [src]=\"recipe.imageURL\"> </ion-img>\n  <ion-card-header>\n    <ion-card-title>{{recipe.name}}</ion-card-title>\n    <ion-card-subtitle>\n      <ion-icon name=\"star\" style = \"color: yellow; font-size: 16px;\"></ion-icon>\n      <ion-icon name=\"star\" style = \"color: yellow; font-size: 16px;\"></ion-icon>\n      <ion-icon name=\"star\" style = \"color: yellow; font-size: 16px;\"></ion-icon>\n      <ion-icon name=\"star\" style = \"color: yellow; font-size: 16px;\"></ion-icon>\n      <ion-icon name=\"star\" style = \"color: yellow; font-size: 16px;\"></ion-icon>\n      &nbsp;\n      <ion-icon name=\"alarm-outline\" style = \"color: red; font-size: 16px;\"></ion-icon> {{recipe.preparationTime}}min\n    </ion-card-subtitle>\n    \n  </ion-card-header>\n  <ion-card-content>\n    {{getRecipeIngredients(100)}}\n  </ion-card-content>\n</ion-card>";
+    __webpack_exports__["default"] = "<ion-card mode = \"ios\" class=\"myCard\" >\n  <div class =\"testOverlay\">\n    <ion-badge mode =\"ios\" color=\"light\">\n      <ion-icon name=\"flame-outline\" style = \"color: #FF4757; font-size: 16px;\"></ion-icon>\n      {{recipe.calories}} cal</ion-badge>\n  </div>\n  <ion-img [src]=\"recipe.imageURL\"> </ion-img>\n  <ion-card-header>\n    <ion-card-title>{{recipe.name}}</ion-card-title>\n    <ion-card-subtitle>\n      <ion-icon name=\"star\" style = \"color: yellow; font-size: 16px;\"></ion-icon>\n      <ion-icon name=\"star\" style = \"color: yellow; font-size: 16px;\"></ion-icon>\n      <ion-icon name=\"star\" style = \"color: yellow; font-size: 16px;\"></ion-icon>\n      <ion-icon name=\"star\" style = \"color: yellow; font-size: 16px;\"></ion-icon>\n      <ion-icon name=\"star\" style = \"color: yellow; font-size: 16px;\"></ion-icon>\n      &nbsp;\n      <ion-icon name=\"alarm-outline\" style = \"color: #FF4757; font-size: 16px;\"></ion-icon> {{recipe.preparationTime}}min\n    </ion-card-subtitle>\n    \n  </ion-card-header>\n  <ion-card-content>\n    {{getRecipeIngredients(100)}}\n  </ion-card-content>\n</ion-card>";
     /***/
   },
 
@@ -521,7 +521,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = ".macronutriments {\n  width: 100%;\n  text-align: center;\n}\n\n#proteins {\n  float: left;\n}\n\n#carbs {\n  display: inline-block;\n  margin: 0 auto;\n}\n\n#fats {\n  float: right;\n}\n\n.macros {\n  border: pink;\n  /* border-width: thick; */\n  border-style: groove;\n  border-radius: 10%;\n  padding: 10px;\n}\n\n.macrosInfos {\n  font-size: 20px;\n  font-weight: bold;\n  color: red;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9tYWNyb3MtcmVjaXBlL0M6XFxVc2Vyc1xcTm9hXFxEb2N1bWVudHNcXE15RGV2UHJvamVjdHNcXE15Rml0TWVhbHNcXE15Rml0TWVhbHMtSW9uaWMvc3JjXFxhcHBcXGNvbXBvbmVudHNcXG1hY3Jvcy1yZWNpcGVcXG1hY3Jvcy1yZWNpcGUuY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL2NvbXBvbmVudHMvbWFjcm9zLXJlY2lwZS9tYWNyb3MtcmVjaXBlLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUVBO0VBRUksV0FBQTtFQUNBLGtCQUFBO0FDRko7O0FES0E7RUFFSSxXQUFBO0FDSEo7O0FETUE7RUFFSSxxQkFBQTtFQUNBLGNBQUE7QUNKSjs7QURPQTtFQUVJLFlBQUE7QUNMSjs7QURRQTtFQUVJLFlBQUE7RUFDQSx5QkFBQTtFQUNBLG9CQUFBO0VBQ0Esa0JBQUE7RUFDQSxhQUFBO0FDTko7O0FEVUE7RUFFSSxlQUFBO0VBQ0EsaUJBQUE7RUFDQSxVQUFBO0FDUkoiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL21hY3Jvcy1yZWNpcGUvbWFjcm9zLXJlY2lwZS5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIlxyXG5cclxuLm1hY3JvbnV0cmltZW50c1xyXG57XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcclxufVxyXG5cclxuI3Byb3RlaW5zXHJcbntcclxuICAgIGZsb2F0OiBsZWZ0O1xyXG59XHJcblxyXG4jY2FyYnNcclxue1xyXG4gICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xyXG4gICAgbWFyZ2luOiAwIGF1dG87XHJcbn1cclxuXHJcbiNmYXRzXHJcbntcclxuICAgIGZsb2F0OnJpZ2h0O1xyXG59XHJcblxyXG4ubWFjcm9zXHJcbntcclxuICAgIGJvcmRlcjogcGluaztcclxuICAgIC8qIGJvcmRlci13aWR0aDogdGhpY2s7ICovXHJcbiAgICBib3JkZXItc3R5bGU6IGdyb292ZTtcclxuICAgIGJvcmRlci1yYWRpdXM6IDEwJTtcclxuICAgIHBhZGRpbmc6IDEwcHg7IFxyXG4gICAgLy9ib3JkZXItcmlnaHQ6IDJweCBzb2xpZCBibHVlO1xyXG59XHJcblxyXG4ubWFjcm9zSW5mb3Ncclxue1xyXG4gICAgZm9udC1zaXplOiAyMHB4O1xyXG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XHJcbiAgICBjb2xvcjogcmVkO1xyXG59IiwiLm1hY3JvbnV0cmltZW50cyB7XG4gIHdpZHRoOiAxMDAlO1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG59XG5cbiNwcm90ZWlucyB7XG4gIGZsb2F0OiBsZWZ0O1xufVxuXG4jY2FyYnMge1xuICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XG4gIG1hcmdpbjogMCBhdXRvO1xufVxuXG4jZmF0cyB7XG4gIGZsb2F0OiByaWdodDtcbn1cblxuLm1hY3JvcyB7XG4gIGJvcmRlcjogcGluaztcbiAgLyogYm9yZGVyLXdpZHRoOiB0aGljazsgKi9cbiAgYm9yZGVyLXN0eWxlOiBncm9vdmU7XG4gIGJvcmRlci1yYWRpdXM6IDEwJTtcbiAgcGFkZGluZzogMTBweDtcbn1cblxuLm1hY3Jvc0luZm9zIHtcbiAgZm9udC1zaXplOiAyMHB4O1xuICBmb250LXdlaWdodDogYm9sZDtcbiAgY29sb3I6IHJlZDtcbn0iXX0= */";
+    __webpack_exports__["default"] = ".macronutriments {\n  width: 100%;\n  text-align: center;\n}\n\n.verticalBar {\n  border-left: 2px solid #47CDFF;\n  height: 30px;\n  float: left;\n  margin-top: 8px;\n}\n\n.macroValue {\n  color: #FF4757;\n  font-size: larger;\n}\n\n.macroName {\n  color: #8D8D8D;\n}\n\n.macrosGrid {\n  text-align: center;\n  position: relative;\n  width: 100%;\n  display: flex;\n  justify-content: space-evenly;\n}\n\n.macro {\n  float: left;\n}\n\n#proteins {\n  display: inline;\n}\n\n#carbs {\n  display: inline-block;\n  margin: 0 auto;\n}\n\n#fats {\n  float: right;\n}\n\n.macros {\n  border: pink;\n  /* border-width: thick; */\n  border-style: groove;\n  border-radius: 10%;\n  padding: 10px;\n}\n\n.macrosInfos {\n  font-size: 20px;\n  font-weight: bold;\n  color: red;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9tYWNyb3MtcmVjaXBlL0M6XFxVc2Vyc1xcTm9hXFxEb2N1bWVudHNcXE15RGV2UHJvamVjdHNcXE15Rml0TWVhbHNcXE15Rml0TWVhbHMtSW9uaWMvc3JjXFxhcHBcXGNvbXBvbmVudHNcXG1hY3Jvcy1yZWNpcGVcXG1hY3Jvcy1yZWNpcGUuY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL2NvbXBvbmVudHMvbWFjcm9zLXJlY2lwZS9tYWNyb3MtcmVjaXBlLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUVBO0VBRUksV0FBQTtFQUNBLGtCQUFBO0FDRko7O0FES0E7RUFFSSw4QkFBQTtFQUNBLFlBQUE7RUFDQSxXQUFBO0VBQ0EsZUFBQTtBQ0hKOztBRE1BO0VBRUksY0FBQTtFQUNBLGlCQUFBO0FDSko7O0FET0E7RUFFSSxjQUFBO0FDTEo7O0FEUUE7RUFFSSxrQkFBQTtFQUNBLGtCQUFBO0VBQ0EsV0FBQTtFQUNBLGFBQUE7RUFDQSw2QkFBQTtBQ05KOztBRFNBO0VBRUksV0FBQTtBQ1BKOztBRFVBO0VBRUksZUFBQTtBQ1JKOztBRFdBO0VBRUkscUJBQUE7RUFDQSxjQUFBO0FDVEo7O0FEWUE7RUFFSSxZQUFBO0FDVko7O0FEYUE7RUFFSSxZQUFBO0VBQ0EseUJBQUE7RUFDQSxvQkFBQTtFQUNBLGtCQUFBO0VBQ0EsYUFBQTtBQ1hKOztBRGVBO0VBRUksZUFBQTtFQUNBLGlCQUFBO0VBQ0EsVUFBQTtBQ2JKIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9tYWNyb3MtcmVjaXBlL21hY3Jvcy1yZWNpcGUuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJcclxuXHJcbi5tYWNyb251dHJpbWVudHNcclxue1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbn1cclxuXHJcbi52ZXJ0aWNhbEJhclxyXG57XHJcbiAgICBib3JkZXItbGVmdDogMnB4IHNvbGlkICM0N0NERkY7XHJcbiAgICBoZWlnaHQ6IDMwcHg7XHJcbiAgICBmbG9hdDogbGVmdDtcclxuICAgIG1hcmdpbi10b3A6IDhweDtcclxufVxyXG5cclxuLm1hY3JvVmFsdWVcclxue1xyXG4gICAgY29sb3I6ICNGRjQ3NTc7XHJcbiAgICBmb250LXNpemU6IGxhcmdlcjtcclxufVxyXG5cclxuLm1hY3JvTmFtZVxyXG57XHJcbiAgICBjb2xvcjogIzhEOEQ4RDtcclxufVxyXG5cclxuLm1hY3Jvc0dyaWRcclxue1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gICAgcG9zaXRpb246IHJlbGF0aXZlO1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbiAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAganVzdGlmeS1jb250ZW50OiBzcGFjZS1ldmVubHk7XHJcbn1cclxuXHJcbi5tYWNyb1xyXG57XHJcbiAgICBmbG9hdDogbGVmdDtcclxufVxyXG5cclxuI3Byb3RlaW5zXHJcbntcclxuICAgIGRpc3BsYXk6IGlubGluZTtcclxufVxyXG5cclxuI2NhcmJzXHJcbntcclxuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcclxuICAgIG1hcmdpbjogMCBhdXRvO1xyXG59XHJcblxyXG4jZmF0c1xyXG57XHJcbiAgICBmbG9hdDpyaWdodDtcclxufVxyXG5cclxuLm1hY3Jvc1xyXG57XHJcbiAgICBib3JkZXI6IHBpbms7XHJcbiAgICAvKiBib3JkZXItd2lkdGg6IHRoaWNrOyAqL1xyXG4gICAgYm9yZGVyLXN0eWxlOiBncm9vdmU7XHJcbiAgICBib3JkZXItcmFkaXVzOiAxMCU7XHJcbiAgICBwYWRkaW5nOiAxMHB4OyBcclxuICAgIC8vYm9yZGVyLXJpZ2h0OiAycHggc29saWQgYmx1ZTtcclxufVxyXG5cclxuLm1hY3Jvc0luZm9zXHJcbntcclxuICAgIGZvbnQtc2l6ZTogMjBweDtcclxuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG4gICAgY29sb3I6IHJlZDtcclxufSIsIi5tYWNyb251dHJpbWVudHMge1xuICB3aWR0aDogMTAwJTtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xufVxuXG4udmVydGljYWxCYXIge1xuICBib3JkZXItbGVmdDogMnB4IHNvbGlkICM0N0NERkY7XG4gIGhlaWdodDogMzBweDtcbiAgZmxvYXQ6IGxlZnQ7XG4gIG1hcmdpbi10b3A6IDhweDtcbn1cblxuLm1hY3JvVmFsdWUge1xuICBjb2xvcjogI0ZGNDc1NztcbiAgZm9udC1zaXplOiBsYXJnZXI7XG59XG5cbi5tYWNyb05hbWUge1xuICBjb2xvcjogIzhEOEQ4RDtcbn1cblxuLm1hY3Jvc0dyaWQge1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgd2lkdGg6IDEwMCU7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGp1c3RpZnktY29udGVudDogc3BhY2UtZXZlbmx5O1xufVxuXG4ubWFjcm8ge1xuICBmbG9hdDogbGVmdDtcbn1cblxuI3Byb3RlaW5zIHtcbiAgZGlzcGxheTogaW5saW5lO1xufVxuXG4jY2FyYnMge1xuICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XG4gIG1hcmdpbjogMCBhdXRvO1xufVxuXG4jZmF0cyB7XG4gIGZsb2F0OiByaWdodDtcbn1cblxuLm1hY3JvcyB7XG4gIGJvcmRlcjogcGluaztcbiAgLyogYm9yZGVyLXdpZHRoOiB0aGljazsgKi9cbiAgYm9yZGVyLXN0eWxlOiBncm9vdmU7XG4gIGJvcmRlci1yYWRpdXM6IDEwJTtcbiAgcGFkZGluZzogMTBweDtcbn1cblxuLm1hY3Jvc0luZm9zIHtcbiAgZm9udC1zaXplOiAyMHB4O1xuICBmb250LXdlaWdodDogYm9sZDtcbiAgY29sb3I6IHJlZDtcbn0iXX0= */";
     /***/
   },
 
@@ -604,7 +604,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvbWFjcm9zL21hY3Jvcy5jb21wb25lbnQuc2NzcyJ9 */";
+    __webpack_exports__["default"] = ".popover-content {\n  background: chartreuse;\n}\n\nion-input {\n  max-width: 20%;\n  font-size: 32px;\n  color: #FF4757;\n}\n\n.macroInput {\n  justify-content: center;\n}\n\nion-icon {\n  font-size: 60px;\n  color: #FF4757;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9tYWNyb3MvQzpcXFVzZXJzXFxOb2FcXERvY3VtZW50c1xcTXlEZXZQcm9qZWN0c1xcTXlGaXRNZWFsc1xcTXlGaXRNZWFscy1Jb25pYy9zcmNcXGFwcFxcY29tcG9uZW50c1xcbWFjcm9zXFxtYWNyb3MuY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL2NvbXBvbmVudHMvbWFjcm9zL21hY3Jvcy5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLHNCQUFBO0FDQ0o7O0FERUE7RUFDSSxjQUFBO0VBQ0EsZUFBQTtFQUNBLGNBQUE7QUNDSjs7QURFQTtFQUNJLHVCQUFBO0FDQ0o7O0FERUE7RUFDSSxlQUFBO0VBQ0EsY0FBQTtBQ0NKIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9tYWNyb3MvbWFjcm9zLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnBvcG92ZXItY29udGVudCB7XHJcbiAgICBiYWNrZ3JvdW5kOiBjaGFydHJldXNlO1xyXG59XHJcblxyXG5pb24taW5wdXQge1xyXG4gICAgbWF4LXdpZHRoOiAyMCU7XHJcbiAgICBmb250LXNpemU6IDMycHg7XHJcbiAgICBjb2xvcjogI0ZGNDc1NztcclxufVxyXG5cclxuLm1hY3JvSW5wdXQge1xyXG4gICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XHJcbn1cclxuXHJcbmlvbi1pY29uIHtcclxuICAgIGZvbnQtc2l6ZTogNjBweDtcclxuICAgIGNvbG9yOiAjRkY0NzU3O1xyXG59IiwiLnBvcG92ZXItY29udGVudCB7XG4gIGJhY2tncm91bmQ6IGNoYXJ0cmV1c2U7XG59XG5cbmlvbi1pbnB1dCB7XG4gIG1heC13aWR0aDogMjAlO1xuICBmb250LXNpemU6IDMycHg7XG4gIGNvbG9yOiAjRkY0NzU3O1xufVxuXG4ubWFjcm9JbnB1dCB7XG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xufVxuXG5pb24taWNvbiB7XG4gIGZvbnQtc2l6ZTogNjBweDtcbiAgY29sb3I6ICNGRjQ3NTc7XG59Il19 */";
     /***/
   },
 
@@ -675,6 +675,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             carbs: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]],
             fats: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]]
           });
+          this.valueSegment = "proteins";
         }
       }, {
         key: "setQuantity",
@@ -715,6 +716,73 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "resetMacros",
         value: function resetMacros() {
           this.macroService.resetMacros();
+        }
+      }, {
+        key: "incrementProteins",
+        value: function incrementProteins() {
+          if (!this.proteins) {
+            this.proteins = 0;
+          }
+
+          this.proteins = this.proteins + 1;
+        }
+      }, {
+        key: "decrementProteins",
+        value: function decrementProteins() {
+          if (!this.proteins) {
+            this.proteins = 1;
+          }
+
+          if (this.proteins > 0) {
+            this.proteins = this.proteins - 1;
+          }
+        }
+      }, {
+        key: "incrementCarbs",
+        value: function incrementCarbs() {
+          if (!this.carbs) {
+            this.carbs = 0;
+          }
+
+          this.carbs = this.carbs + 1;
+        }
+      }, {
+        key: "decrementCarbs",
+        value: function decrementCarbs() {
+          if (!this.carbs) {
+            this.carbs = 1;
+          }
+
+          if (this.carbs > 0) {
+            this.carbs = this.carbs - 1;
+          }
+        }
+      }, {
+        key: "incrementFats",
+        value: function incrementFats() {
+          if (!this.fats) {
+            this.fats = 0;
+          }
+
+          this.fats = this.fats + 1;
+        }
+      }, {
+        key: "decrementFats",
+        value: function decrementFats() {
+          if (!this.fats) {
+            this.fats = 1;
+          }
+
+          if (this.fats > 0) {
+            this.fats = this.fats - 1;
+          }
+        }
+      }, {
+        key: "formValid",
+        value: function formValid() {
+          if (this.proteins && this.carbs && this.fats) {
+            return true;
+          } else return false;
         }
       }]);
 

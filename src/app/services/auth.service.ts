@@ -22,6 +22,7 @@ export class AuthService {
   url = environment.url;
   user = null;
   authenticationState = new BehaviorSubject(false);
+  registerState = new BehaviorSubject(false);
   favorites;
   token;
  
@@ -58,6 +59,25 @@ export class AuthService {
     console.log(spl2.substring(0, (spl2.length - 3)))
     return spl2.substring(0, (spl2.length - 3));
   }
+
+  loginAfterRegister(credentials) {
+    return this.http.post(`${this.url}/users/login`, credentials)
+     .pipe(
+       tap(res => {
+         this.storage.set(TOKEN_KEY, res['token']);
+         this.user = this.helper.decodeToken(res['token']);
+         if(this.user.paidStatus === false)
+         {
+           this.showAlert('Votre compte n\'est pas activé ! Veuillez contacter votre coach sportif.');
+         }
+         else this.registerState.next(true);
+       }),
+       catchError(e => {
+         this.showAlert(e.error.msg);
+         throw new Error(e);
+       })
+     );
+ }
 
  
    register(credentials) {
@@ -96,7 +116,7 @@ export class AuthService {
           this.user = this.helper.decodeToken(res['token']);
           if(this.user.paidStatus === false)
           {
-            this.showAlert('Vous n\'êtes pas abonné à l\'application !');
+            this.showAlert('Votre compte n\'est pas activé ! Veuillez contacter votre coach sportif.');
           }
           else this.authenticationState.next(true);
         }),
@@ -105,41 +125,6 @@ export class AuthService {
           throw new Error(e);
         })
       );
-
-/*       if(this.plt.is('cordova')) {
-        return this.postHttpNative(`${this.url}/users/login`, credentials).pipe(
-          tap(res => {
-            console.log(res);
-            console.log(JSON.parse(res.data));
-            this.token = JSON.parse(res.data)['token'];
-            this.storage.set(TOKEN_KEY, JSON.parse(res.data)['token']);
-            this.user = this.helper.decodeToken(JSON.parse(res.data)['token']);
-            this.authenticationState.next(true);
-          }),
-          catchError(e => {
-            console.log(e);
-            this.showAlert(e.error.msg);
-            throw new Error(e);
-          })
-        )
-      }
-  
-      else {
-        return this.postHttp(`${this.url}/users/login`, credentials).pipe(
-          tap(res => {
-            console.log(res);
-            console.log(res['token'])
-            this.storage.set(TOKEN_KEY, res['token']);
-            this.user = this.helper.decodeToken(res['token']);
-            this.authenticationState.next(true);
-          }),
-          catchError(e => {
-            console.log(e);
-            this.showAlert(e.error.msg);
-            throw new Error(e);
-          })
-        )
-      } */
   }
  
   logout() {
