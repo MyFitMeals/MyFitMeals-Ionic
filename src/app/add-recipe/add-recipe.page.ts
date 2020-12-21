@@ -1,9 +1,12 @@
+import { Diet } from './../models/diet';
+import { Type } from './../models/type';
 import { RecipesLoaderService } from './../services/recipes-loader.service';
 import { Component, OnInit } from '@angular/core';
 import { PopoverController, ToastController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Temperature } from 'src/app/models/temperature';
 
 @Component({
   selector: 'app-add-recipe',
@@ -11,6 +14,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-recipe.page.scss'],
 })
 export class AddRecipePage implements OnInit {
+  temperature: any;
+  type: any;
+  diet: any;
 
   ngOnInit() {
   }
@@ -55,6 +61,15 @@ export class AddRecipePage implements OnInit {
     formData.append('preparationTime', this.registerForm.value.preparationTime);
     formData.append('ingredients', this.registerForm.value.ingredients);
     formData.append('tips', this.registerForm.value.tips);
+    if(this.temperature != null && this.temperature != undefined) {
+      formData.append('temperature', this.temperature);
+    }
+    if(this.type != null && this.type != undefined) {
+      formData.append('type', this.type);
+    }
+    if(this.diet != null && this.diet != undefined) {
+      formData.append('diet', this.diet);
+    }
 
 
     this.http.post<any>('https://myfitmeals.herokuapp.com/recipes/', formData).subscribe(
@@ -83,5 +98,44 @@ export class AddRecipePage implements OnInit {
       duration: 1000
     });
     toast.present();
+  }
+
+  radioGroupChange(event, categorie) {
+    console.log(event.detail);
+    if("Temperature" === categorie) this.temperature = event.detail.value;
+    if("Type" === categorie) this.type = event.detail.value;
+    if("Diet" === categorie) this.diet = event.detail.value;
+    }
+
+  getTemperature(value: any) {
+    console.log(value);
+    if("Chaud" === value) {
+      return Temperature.CHAUD;
+    }
+
+    else if("Froid" === value) {
+      return Temperature.FROID;
+    }
+  }
+
+  getType(value: any) {
+    console.log(value);
+    if("Sucré" === value) {
+      return Type.SUCRE;
+    }
+
+    else if("Salé" === value) {
+      return Type.SALE;
+    }
+  }
+
+  getDiet(value: any) {
+    return Diet.getValue(value);
+  }
+
+  getAllValuesEnum(value: any) {
+    if(value === 'Type') return Object.values(Type).slice(0, Object.values(Type).length - 1);
+    if(value === 'Diet') return Object.values(Diet).slice(0, Object.values(Diet).length - 1);
+    if(value === 'Temperature') return Object.values(Temperature).slice(0, Object.values(Temperature).length - 1);
   }
 }

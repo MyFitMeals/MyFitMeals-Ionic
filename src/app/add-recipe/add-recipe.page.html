@@ -55,6 +55,49 @@
         <ion-textarea type = "text" name = "tips" formControlName="tips"></ion-textarea>
       </ion-item>
 
+      <ion-list>
+        <ion-radio-group
+        allow-empty-selection = "true"
+        name="radio-group"
+        (ionChange)="radioGroupChange($event, 'Temperature')">
+          <ion-list-header>
+            <ion-label>Plat...</ion-label>
+          </ion-list-header>
+      
+          <ion-item *ngFor = "let temperature of getAllValuesEnum('Temperature')">
+            <ion-label>{{temperature}}</ion-label>
+            <ion-radio slot="start" [value]="getTemperature(temperature)"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+
+      <ion-list>
+        <ion-radio-group
+        allow-empty-selection = "true"
+        name="radio-group"
+        (ionChange)="radioGroupChange($event, 'Type')">
+
+        <ion-item *ngFor = "let type of getAllValuesEnum('Type')">
+          <ion-label>{{type}}</ion-label>
+          <ion-radio slot="start" [value]="getType(type)"></ion-radio>
+        </ion-item>
+        </ion-radio-group>
+      </ion-list>
+
+
+      <ion-list>
+        <ion-radio-group
+        allow-empty-selection = "true"
+        name="radio-group"
+        (ionChange)="radioGroupChange($event, 'Diet')">
+
+        <ion-item *ngFor = "let diet of getAllValuesEnum('Diet')">
+          <ion-label>{{diet}}</ion-label>
+          <ion-radio slot="start" [value]="getDiet(diet)"></ion-radio>
+        </ion-item>
+        </ion-radio-group>
+      </ion-list>
+
       <ion-item>
         <ion-input type = "file" name = "image" (change) = "selectImage($event)"></ion-input>
       </ion-item>

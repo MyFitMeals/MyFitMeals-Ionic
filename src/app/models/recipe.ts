@@ -1,3 +1,6 @@
+import { Diet } from './diet';
+import { Type } from './type';
+import { Temperature } from './temperature';
 export class Recipe 
 {
     name: string;
@@ -11,4 +14,7 @@ export class Recipe
     tips: string;
     imageURL: any;
     _id: string;
+    temperature?: Temperature;
+    type?: Type;
+    diet?: Diet;
 }

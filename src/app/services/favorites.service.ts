@@ -86,15 +86,6 @@ export class FavoritesService {
 
   getFavorites(): Recipe[]
   {
-    let temp;
-    this.storage.get('favorites').then((res) => {
-      if(res) {
-        console.log(res);
-        temp = res;
-      }
-    })
-    console.log('THIS IS FAVORITESTEMP');
-    console.log(temp);
     return this.favorites;
   }
 }
