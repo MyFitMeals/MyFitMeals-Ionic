@@ -21,8 +21,7 @@ export class MacrosCalculatorPage implements OnInit {
       gender: ['F', [Validators.required]],
       height: ['', [Validators.required]],
       weight: ['', [Validators.required]],
-      email: [this.authService.temporary_email],
-      password: [this.authService.temporary_password]
+      email: [this.authService.temporary_email]
     });
   }
  

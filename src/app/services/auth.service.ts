@@ -26,7 +26,6 @@ export class AuthService {
   favorites;
   token;
   temporary_email;
-  temporary_password;
  
   constructor(private http: HttpClient, private helper: JwtHelperService, private storage: Storage,
     private plt: Platform, private alertController: AlertController, private httpNative: HTTP, private loadingCtrl: LoadingController) {
@@ -87,7 +86,6 @@ export class AuthService {
        tap( res => {
          console.log(res);
          this.temporary_email = res['email'];
-         this.temporary_password = res['password'];
          this.registerState.next(true);
        }),
       catchError(e => {
