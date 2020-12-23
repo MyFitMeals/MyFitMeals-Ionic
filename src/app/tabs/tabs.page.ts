@@ -1,3 +1,4 @@
+import { AuthService } from './../services/auth.service';
 import { FavoritesService } from './../services/favorites.service';
 import { RecipesLoaderService } from './../services/recipes-loader.service';
 import { LoadingController } from '@ionic/angular';
@@ -12,7 +13,8 @@ export class TabsPage {
 
   constructor(private favoritesService: FavoritesService, 
               private loadingController: LoadingController, 
-              private recipesLoder: RecipesLoaderService) {}
+              private recipesLoder: RecipesLoaderService,
+              private authService: AuthService) {}
 
   ngOnInit() {
     console.log('Tabs entering Ion')
@@ -33,6 +35,7 @@ export class TabsPage {
     
         await this.recipesLoder.loadRecipes();
         await this.favoritesService.loadFavorites();
+        await this.authService.loadInformations();
   }
 
       

@@ -43,3 +43,18 @@ ion-content ion-toolbar {
     width: 50%;
     height: 50%;
   }
+
+  #aboutMeAttributes {
+    display: flex;
+    place-content: center;
+    /* display: inline-block; */
+    width: 100%;
+  }
+
+  #aboutMe {
+    margin-left: 20px;
+  }
+
+  .aboutMeElement {
+    width: 33.33%;
+  }

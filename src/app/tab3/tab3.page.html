@@ -15,6 +15,21 @@
     <h3>Bonjour, {{getFirstName()}} {{getLastName()}} !</h3>
   </div>
 
+  <div id = "aboutMe">
+    <h5>A propos de moi</h5>
+    <div id = "aboutMeAttributes">
+      <div class = "aboutMeElement">
+        <ion-icon name="calendar" style = "color: #FF4757;"></ion-icon>
+        {{getAge()}} ans</div>
+      <div class = "aboutMeElement">
+        <ion-icon name="person-outline" style = "color: #FF4757;"></ion-icon>
+        {{getHeight()}} cm</div>
+      <div class = "aboutMeElement">
+        <ion-icon name="speedometer" style = "color: #FF4757;"></ion-icon>
+        {{getWeight()}} kg</div>
+    </div>
+  </div>
+
   <ion-list mode ="ios">
 <!--     <ion-item>
       Modifier mon mot de passe

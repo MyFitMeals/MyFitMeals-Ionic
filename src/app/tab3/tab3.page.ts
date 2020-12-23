@@ -11,6 +11,9 @@ export class Tab3Page {
 
   private firstName: String;
   private lastName: String;
+  private age: Number;
+  private height: Number;
+  private weight: Number;
 
 
   constructor(private favoritesService: FavoritesService,
@@ -19,10 +22,12 @@ export class Tab3Page {
     }
 
   loadInformations() {
-    this.authService.getInformations().subscribe(res => {
-      this.firstName = res['user']['firstName'];
-      this.lastName = res['user']['lastName'];
-    });
+    console.log(this.authService.userInformations);
+    this.firstName = this.authService.userInformations['user']['firstName'];
+    this.lastName = this.authService.userInformations['user']['lastName'];
+    this.age = this.authService.userInformations['user']['age'];
+    this.weight = this.authService.userInformations['user']['weight'];
+    this.height = this.authService.userInformations['user']['height'];
   }
 
   getFirstName()
@@ -38,5 +43,17 @@ export class Tab3Page {
   logout()
   {
     this.authService.logout();
+  }
+
+  getAge() {
+    return this.age;
+  }
+
+  getWeight() {
+    return this.weight;
+  }
+
+  getHeight() {
+    return this.height;
   }
 }

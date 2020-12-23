@@ -26,6 +26,7 @@ export class AuthService {
   favorites;
   token;
   temporary_email;
+  userInformations;
  
   constructor(private http: HttpClient, private helper: JwtHelperService, private storage: Storage,
     private plt: Platform, private alertController: AlertController, private httpNative: HTTP, private loadingCtrl: LoadingController) {
@@ -133,6 +134,7 @@ export class AuthService {
      return this.http.post(`${this.url}/users/login`, credentials)
       .pipe(
         tap(res => {
+          console.log(res);
           this.storage.set(TOKEN_KEY, res['token']);
           this.user = this.helper.decodeToken(res['token']);
           if(this.user.paidStatus === false)
@@ -170,6 +172,10 @@ export class AuthService {
   getInformations()
   {
     return this.http.get(`${this.url}/users/informations`).pipe(
+      tap(res =>{
+        console.log(res);
+        console.log(this.user);
+      }),
       catchError(e => {
         let status = e.status;
         if (status === 401) {
@@ -179,6 +185,14 @@ export class AuthService {
         throw new Error(e);
       })
     )
+  }
+
+  async loadInformations() {
+    return this.http.get(`${this.url}/users/informations`).subscribe(res => {
+      console.log('Load Informations');
+      this.userInformations = res;
+      console.log(res);
+    });
   }
 
 
