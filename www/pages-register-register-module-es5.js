@@ -247,7 +247,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           this.authService.register(this.credentialsForm.value).subscribe(function (res) {
             // Call Login to automatically login the new user
-            _this.authService.login(_this.credentialsForm.value).subscribe();
+            _this.authService.loginAfterRegister(_this.credentialsForm.value).subscribe();
           });
         }
       }]);

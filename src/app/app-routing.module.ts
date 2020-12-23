@@ -47,7 +47,11 @@ const routes: Routes = [
   },
   {
     path: 'sliders',
-    loadChildren: () => import('./sliders/sliders.module').then( m => m.SlidersPageModule)
+    loadChildren: () => import('./pages/sliders/sliders.module').then( m => m.SlidersPageModule)
+  },
+  {
+    path: 'macros-calculator',
+    loadChildren: () => import('./pages/macros-calculator/macros-calculator.module').then( m => m.MacrosCalculatorPageModule)
   }
 ];
 @NgModule({

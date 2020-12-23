@@ -11,6 +11,20 @@
   </div>
 
     <form [formGroup]="credentialsForm" (ngSubmit)="onSubmit()" class = "loginForm">
+
+            <ion-item mode = "ios" color = "transparent">
+        <ion-label position="floating" color = "primary">
+          <ion-icon name="person-outline" style = "color: #FF4757;"></ion-icon>
+          Prénom</ion-label>
+        <ion-input type="text" formControlName="firstName" color = "primary"></ion-input>
+      </ion-item>
+
+      <ion-item mode = "ios" color = "transparent">
+        <ion-label position="floating" color = "primary">
+          <ion-icon name="person-outline" style = "color: #FF4757;"></ion-icon>
+          Nom</ion-label>
+        <ion-input type="text" formControlName="lastName" color = "primary"></ion-input>
+      </ion-item>
  
       <ion-item mode = "ios" color = "transparent">
         <ion-label position="floating" color = "primary">
@@ -26,19 +40,7 @@
         <ion-input type="password" formControlName="password" color = "primary"></ion-input>
       </ion-item>
 
-      <ion-item mode = "ios" color = "transparent">
-        <ion-label position="floating" color = "primary">
-          <ion-icon name="person-outline" style = "color: #FF4757;"></ion-icon>
-          Prénom</ion-label>
-        <ion-input type="text" formControlName="firstName" color = "primary"></ion-input>
-      </ion-item>
 
-      <ion-item mode = "ios" color = "transparent">
-        <ion-label position="floating" color = "primary">
-          <ion-icon name="person-outline" style = "color: #FF4757;"></ion-icon>
-          Nom</ion-label>
-        <ion-input type="text" formControlName="lastName" color = "primary"></ion-input>
-      </ion-item>
 
       <div class = "loginButtons">
         <ion-button mode = "ios" id = "logButton" expand="block" color="danger" type="submit" >Créer mon compte</ion-button>

@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header mode = \"ios\" translucent>\n  <ion-toolbar mode = \"ios\" color=\"danger\">\n\n    <ion-title>Mes favoris</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content [fullscreen]=\"true\">\n  <ion-header collapse=\"condense\">\n    <ion-toolbar>\n      <ion-title size=\"large\">Page de profil - A VENIR !</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-list>\n    <ion-item class=\"eventItem\" *ngFor = \"let recipe of getFavorites()\" [id]=\"recipe.id\" lines=\"none\" >\n      <app-recipes [recipe] = \"recipe\" [routerLink]=\"['/recipes', recipe._id]\"></app-recipes>\n    </ion-item>\n\n    <ion-item>\n      <ion-text *ngIf = \"noFavorites()\">\n        Vous n'avez pas ajouté de favoris.\n      </ion-text>\n    </ion-item>\n\n  </ion-list>\n\n</ion-content>\n\n<!-- <ion-content [fullscreen]=\"true\">\n  <ion-header collapse=\"condense\">\n    <ion-toolbar>\n      <ion-title size=\"large\">Ajouter une recette</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n<form [formGroup] = \"registerForm\">\n  <div>\n    <ion-list lines=\"full\" class=\"ion-no-margin ion-no-padding\">\n      <ion-item>\n        <ion-label position = \"floating\">Nom recette</ion-label>\n        <ion-input type = \"text\" name = \"recipeName\" formControlName=\"name\"></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position = \"floating\">Calories</ion-label>\n        <ion-input type = \"number\" name = \"calories\" formControlName=\"calories\" ></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position = \"floating\">Protéines</ion-label>\n        <ion-input type = \"number\" name = \"proteins\" formControlName=\"proteins\"></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position = \"floating\">Lipides</ion-label>\n        <ion-input type = \"number\" name = \"fats\" formControlName=\"fats\"></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position = \"floating\">Glucides</ion-label>\n        <ion-input type = \"number\" name = \"carbs\" formControlName=\"carbs\"></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position = \"floating\">Instructions</ion-label>\n        <ion-textarea type = \"text\" name = \"instructions\" formControlName=\"instructions\"></ion-textarea>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position = \"floating\">Ingredients</ion-label>\n        <ion-textarea type = \"text\" name = \"ingredients\" formControlName=\"ingredients\"></ion-textarea>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position = \"floating\">Temps de préparation</ion-label>\n        <ion-input type = \"number\" name = \"preparationTime\" formControlName=\"preparationTime\"></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position = \"floating\">Conseils</ion-label>\n        <ion-textarea type = \"text\" name = \"tips\" formControlName=\"tips\"></ion-textarea>\n      </ion-item>\n\n      <ion-item>\n        <ion-input type = \"file\" name = \"image\" (change) = \"selectImage($event)\"></ion-input>\n      </ion-item>\n    </ion-list>\n\n  </div>\n  <br/>\n  <div>\n    <button type = \"submit\" (click) = \"onSubmit()\" style=\"font-size: 20px; margin-left: 10px;\">Ajouter recette</button>\n  </div>\n\n</form>\n\n</ion-content> -->\n";
+    __webpack_exports__["default"] = "<ion-header mode = \"ios\" translucent>\n  <ion-toolbar mode = \"ios\" color=\"danger\">\n\n    <ion-title>Mes favoris</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content [fullscreen]=\"true\">\n  <ion-header collapse=\"condense\">\n    <ion-toolbar>\n      <ion-title size=\"large\">Page de profil - A VENIR !</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-list>\n    <ion-item class=\"eventItem\" *ngFor = \"let recipe of getFavorites()\" [id]=\"recipe.id\" lines=\"none\" >\n      <app-recipes [recipe] = \"recipe\" [routerLink]=\"['/recipes', recipe._id]\"></app-recipes>\n    </ion-item>\n\n    <ion-item>\n      <ion-text *ngIf = \"noFavorites()\">\n        Vous n'avez pas ajouté de favoris.\n      </ion-text>\n    </ion-item>\n\n  </ion-list>\n\n</ion-content>";
     /***/
   },
 
@@ -224,169 +224,32 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _services_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-    /*! ./../services/auth.service */
-    "./src/app/services/auth.service.ts");
-    /* harmony import */
-
-
-    var _services_favorites_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    var _services_favorites_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! ./../services/favorites.service */
     "./src/app/services/favorites.service.ts");
     /* harmony import */
 
 
-    var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-    /*! @angular/common/http */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
-    /* harmony import */
-
-
-    var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-    /* harmony import */
-
-
-    var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
-    /*! @angular/forms */
-    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
 
     var Tab2Page = /*#__PURE__*/function () {
-      /*   ngOnInit() {
-          console.log('Tab 2 entering Ion')
-          this.loadRecipes().then(res =>
-            {
-              loading.then(loaded =>
-                {
-                  console.log('inside loading');
-                  console.log(res);
-                  loaded.dismiss();
-                })
-            });
-          let loading = this.presentLoading();
-        } */
-      function Tab2Page(http, favoritesService, authService, loadingController) {
+      function Tab2Page(favoritesService, loadingController) {
         _classCallCheck(this, Tab2Page);
 
-        this.http = http;
         this.favoritesService = favoritesService;
-        this.authService = authService;
         this.loadingController = loadingController;
-        this.registerForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormGroup"]({
-          name: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormControl"]('', _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required),
-          calories: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormControl"]('', _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required),
-          proteins: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormControl"]('', _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required),
-          fats: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormControl"]('', _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required),
-          carbs: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormControl"]('', _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required),
-          instructions: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormControl"]('', _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required),
-          preparationTime: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormControl"]('', _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required),
-          ingredients: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormControl"]('', _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required),
-          tips: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormControl"]('', _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required)
-        });
       }
 
       _createClass(Tab2Page, [{
-        key: "selectImage",
-        value: function selectImage(event) {
-          if (event.target.files.length > 0) {
-            var file = event.target.files[0];
-            this.images = file;
-          }
-        }
-      }, {
-        key: "loadRecipes",
-        value: function loadRecipes() {
-          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-            return regeneratorRuntime.wrap(function _callee$(_context) {
-              while (1) {
-                switch (_context.prev = _context.next) {
-                  case 0:
-                    _context.next = 2;
-                    return this.favoritesService.loadFavorites();
-
-                  case 2:
-                  case "end":
-                    return _context.stop();
-                }
-              }
-            }, _callee, this);
-          }));
-        }
-      }, {
-        key: "presentLoading",
-        value: function presentLoading() {
-          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-            var loading;
-            return regeneratorRuntime.wrap(function _callee2$(_context2) {
-              while (1) {
-                switch (_context2.prev = _context2.next) {
-                  case 0:
-                    _context2.next = 2;
-                    return this.loadingController.create({
-                      cssClass: 'my-custom-class',
-                      message: 'Veuillez patienter..'
-                    });
-
-                  case 2:
-                    loading = _context2.sent;
-                    _context2.next = 5;
-                    return loading.present();
-
-                  case 5:
-                    return _context2.abrupt("return", loading);
-
-                  case 6:
-                  case "end":
-                    return _context2.stop();
-                }
-              }
-            }, _callee2, this);
-          }));
-        }
-      }, {
-        key: "onSubmit",
-        value: function onSubmit() {
-          var formData = new FormData();
-          formData.append('file', this.images);
-          formData.append('name', this.registerForm.value.name);
-          formData.append('calories', this.registerForm.value.calories);
-          formData.append('proteins', this.registerForm.value.proteins);
-          formData.append('fats', this.registerForm.value.fats);
-          formData.append('carbs', this.registerForm.value.carbs);
-          formData.append('instructions', this.registerForm.value.instructions);
-          formData.append('preparationTime', this.registerForm.value.preparationTime);
-          formData.append('ingredients', this.registerForm.value.ingredients);
-          formData.append('tips', this.registerForm.value.tips);
-          this.http.post('https://myfitmeals.herokuapp.com/recipes/', formData).subscribe(function (res) {
-            return console.log(res);
-          }, function (err) {
-            return console.log(err);
-          });
-        }
-      }, {
         key: "getFavorites",
         value: function getFavorites() {
-          console.log('is Admin ? : ');
-          console.log(this.authService.isAdmin());
           return this.favoritesService.getFavorites();
         }
       }, {
         key: "noFavorites",
-        value: function noFavorites() {
-          return this.favoritesService.getFavorites().length == 0;
-        }
-      }, {
-        key: "getRecipes",
-        value: function getRecipes() {
-          var _this = this;
-
-          this.authService.getAllRecipes().subscribe(function (res) {
-            console.log(res);
-            console.log('aftre');
-            console.log(res['recipes']);
-            console.log(_this.favoritesService.getFavorites()); //return res['recipes']
-          });
+        value: function noFavorites() {// return this.favoritesService.getFavorites().length == 0;
         }
       }]);
 
@@ -395,17 +258,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     Tab2Page.ctorParameters = function () {
       return [{
-        type: _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"]
-      }, {
-        type: _services_favorites_service__WEBPACK_IMPORTED_MODULE_3__["FavoritesService"]
-      }, {
-        type: _services_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"]
+        type: _services_favorites_service__WEBPACK_IMPORTED_MODULE_2__["FavoritesService"]
       }, {
         type: _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["LoadingController"]
       }];
     };
 
-    Tab2Page = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_5__["Component"])({
+    Tab2Page = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
       selector: 'app-tab2',
       template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
       /*! raw-loader!./tab2.page.html */

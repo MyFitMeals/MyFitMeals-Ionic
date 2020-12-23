@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header mode = \"ios\" translucent>\n  <ion-toolbar mode = \"ios\" color=\"danger\">\n\n    <ion-title>Paramètres</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n  <div class = \"mainText\">\n<!--     <ion-avatar>\n  <img src=\"https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y\">\n</ion-avatar> -->\n<img src = \"../../assets/avatar.png\">\n    <h3>Bonjour, {{getFirstName()}} {{getLastName()}} !</h3>\n  </div>\n\n  <ion-list mode =\"ios\">\n<!--     <ion-item>\n      Modifier mon mot de passe\n    </ion-item>\n -->\n    <ion-item [routerLink] = \"['/mentions']\"> \n      Mentions Légales\n    </ion-item>\n\n    <ion-item [routerLink] = \"['/cgv']\">\n      Conditions Générales\n    </ion-item>\n\n    <ion-item [routerLink] = \"['/politique']\">\n      Politique de confidentialité\n    </ion-item>\n    \n    <ion-item [routerLink] = \"['/contact-us']\">\n      Nous contacter\n    </ion-item>\n\n    \n  </ion-list>\n\n  <div style = \"text-align: center; margin-top: 1em;\">\n    <ion-button mode = \"ios\" (click) = \"logout()\" color = \"danger\">Me déconnecter</ion-button>\n  </div>\n  \n</ion-content>\n\n\n<!-- <ion-content [fullscreen]=\"true\">\n  <ion-header collapse=\"condense\">\n    <ion-toolbar>\n      <ion-title size=\"large\">Page de profil - A VENIR !</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-list>\n    <ion-item class=\"eventItem\" *ngFor = \"let recipe of getFavorites()\" [id]=\"recipe.id\" lines=\"none\" >\n      <app-recipes [recipe] = \"recipe\" [routerLink]=\"['./', recipe._id]\"></app-recipes>\n    </ion-item>\n  </ion-list>\n\n\n</ion-content> -->\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header mode = \"ios\" translucent>\n  <ion-toolbar mode = \"ios\" color=\"danger\">\n\n    <ion-title>Paramètres</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n  <div class = \"mainText\">\n<!--     <ion-avatar>\n  <img src=\"https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y\">\n</ion-avatar> -->\n<img src = \"../../assets/avatar.png\">\n    <h3>Bonjour, {{getFirstName()}} {{getLastName()}} !</h3>\n  </div>\n\n  <ion-list mode =\"ios\">\n<!--     <ion-item>\n      Modifier mon mot de passe\n    </ion-item>\n -->\n    <ion-item [routerLink] = \"['/mentions']\"> \n      Mentions Légales\n    </ion-item>\n\n    <ion-item [routerLink] = \"['/cgv']\">\n      Conditions Générales\n    </ion-item>\n\n    <ion-item [routerLink] = \"['/politique']\">\n      Politique de confidentialité\n    </ion-item>\n    \n    <ion-item [routerLink] = \"['/contact-us']\">\n      Nous contacter\n    </ion-item>\n\n    \n  </ion-list>\n\n  <div style = \"text-align: center; margin-top: 1em;\">\n    <ion-button mode = \"ios\" (click) = \"logout()\" color = \"danger\">Me déconnecter</ion-button>\n  </div>\n  \n</ion-content>\n");
 
 /***/ }),
 
@@ -143,9 +143,6 @@ let Tab3Page = class Tab3Page {
         this.favoritesService = favoritesService;
         this.authService = authService;
         this.loadInformations();
-    }
-    getFavorites() {
-        return this.favoritesService.getFavorites();
     }
     loadInformations() {
         this.authService.getInformations().subscribe(res => {

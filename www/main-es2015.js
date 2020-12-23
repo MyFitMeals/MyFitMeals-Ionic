@@ -514,6 +514,10 @@ const routes = [
     {
         path: 'mentions',
         loadChildren: () => __webpack_require__.e(/*! import() | pages-mentions-mentions-module */ "pages-mentions-mentions-module").then(__webpack_require__.bind(null, /*! ./pages/mentions/mentions.module */ "./src/app/pages/mentions/mentions.module.ts")).then(m => m.MentionsPageModule)
+    },
+    {
+        path: 'sliders',
+        loadChildren: () => __webpack_require__.e(/*! import() | sliders-sliders-module */ "sliders-sliders-module").then(__webpack_require__.bind(null, /*! ./sliders/sliders.module */ "./src/app/sliders/sliders.module.ts")).then(m => m.SlidersPageModule)
     }
 ];
 let AppRoutingModule = class AppRoutingModule {
@@ -561,6 +565,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/splash-screen/ngx */ "./node_modules/@ionic-native/splash-screen/__ivy_ngcc__/ngx/index.js");
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/__ivy_ngcc__/ngx/index.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/__ivy_ngcc__/fesm2015/ionic-storage.js");
+
 
 
 
@@ -569,12 +575,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AppComponent = class AppComponent {
-    constructor(platform, splashScreen, statusBar, auth, router) {
+    constructor(platform, splashScreen, statusBar, auth, router, storage) {
         this.platform = platform;
         this.splashScreen = splashScreen;
         this.statusBar = statusBar;
         this.auth = auth;
         this.router = router;
+        this.storage = storage;
         this.initializeApp();
     }
     initializeApp() {
@@ -586,7 +593,26 @@ let AppComponent = class AppComponent {
                     this.router.navigate(['tabs']);
                 }
                 else {
+                    console.log(state);
                     this.router.navigate(['login']);
+                }
+            });
+            this.auth.registerState.subscribe(state => {
+                if (state) {
+                    this.router.navigate(['macros-calculator']);
+                }
+                else {
+                    this.router.navigate(['register']);
+                }
+            });
+            this.storage.get('firstTime').then(value => {
+                if (value) {
+                    console.log(value);
+                }
+                else {
+                    console.log('out');
+                    this.storage.set('firstTime', 'true');
+                    this.router.navigate(['sliders']);
                 }
             });
         });
@@ -597,7 +623,8 @@ AppComponent.ctorParameters = () => [
     { type: _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_4__["SplashScreen"] },
     { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__["StatusBar"] },
     { type: _services_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"] }
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"] },
+    { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_7__["Storage"] }
 ];
 AppComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
@@ -942,6 +969,7 @@ let AuthService = class AuthService {
         this.url = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].url;
         this.user = null;
         this.authenticationState = new rxjs__WEBPACK_IMPORTED_MODULE_7__["BehaviorSubject"](false);
+        this.registerState = new rxjs__WEBPACK_IMPORTED_MODULE_7__["BehaviorSubject"](false);
         this.plt.ready().then(() => {
             this.checkToken();
         });
@@ -968,6 +996,21 @@ let AuthService = class AuthService {
         let spl2 = splitted.substring(1);
         console.log(spl2.substring(0, (spl2.length - 3)));
         return spl2.substring(0, (spl2.length - 3));
+    }
+    loginAfterRegister(credentials) {
+        return this.http.post(`${this.url}/users/login`, credentials)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["tap"])(res => {
+            this.storage.set(TOKEN_KEY, res['token']);
+            this.user = this.helper.decodeToken(res['token']);
+            if (this.user.paidStatus === false) {
+                this.showAlert('Votre compte n\'est pas activé ! Veuillez contacter votre coach sportif.');
+            }
+            else
+                this.registerState.next(true);
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["catchError"])(e => {
+            this.showAlert(e.error.msg);
+            throw new Error(e);
+        }));
     }
     register(credentials) {
         return this.http.post(`${this.url}/users/register`, credentials).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["catchError"])(e => {
@@ -1008,40 +1051,6 @@ let AuthService = class AuthService {
             this.showAlert(e.error.msg);
             throw new Error(e);
         }));
-        /*       if(this.plt.is('cordova')) {
-                return this.postHttpNative(`${this.url}/users/login`, credentials).pipe(
-                  tap(res => {
-                    console.log(res);
-                    console.log(JSON.parse(res.data));
-                    this.token = JSON.parse(res.data)['token'];
-                    this.storage.set(TOKEN_KEY, JSON.parse(res.data)['token']);
-                    this.user = this.helper.decodeToken(JSON.parse(res.data)['token']);
-                    this.authenticationState.next(true);
-                  }),
-                  catchError(e => {
-                    console.log(e);
-                    this.showAlert(e.error.msg);
-                    throw new Error(e);
-                  })
-                )
-              }
-          
-              else {
-                return this.postHttp(`${this.url}/users/login`, credentials).pipe(
-                  tap(res => {
-                    console.log(res);
-                    console.log(res['token'])
-                    this.storage.set(TOKEN_KEY, res['token']);
-                    this.user = this.helper.decodeToken(res['token']);
-                    this.authenticationState.next(true);
-                  }),
-                  catchError(e => {
-                    console.log(e);
-                    this.showAlert(e.error.msg);
-                    throw new Error(e);
-                  })
-                )
-              } */
     }
     logout() {
         this.storage.remove(TOKEN_KEY).then(() => {
@@ -1358,18 +1367,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _auth_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./auth.service */ "./src/app/services/auth.service.ts");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/__ivy_ngcc__/fesm2015/ionic-storage.js");
+
 
 
 
 let FavoritesService = class FavoritesService {
-    constructor(authService) {
+    constructor(authService, storage) {
         this.authService = authService;
+        this.storage = storage;
         this.favorites = [];
         console.log('I am in favorites services');
     }
     addFavorite(recipe) {
         this.favorites.push(recipe);
         this.addRecipe(recipe);
+        this.storage.set('favorites', this.favorites[0].name);
     }
     removeFavorite(recipe) {
         this.favorites = this.favorites.filter(favorite => {
@@ -1420,7 +1433,8 @@ let FavoritesService = class FavoritesService {
     }
 };
 FavoritesService.ctorParameters = () => [
-    { type: _auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"] }
+    { type: _auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"] },
+    { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_3__["Storage"] }
 ];
 FavoritesService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])({

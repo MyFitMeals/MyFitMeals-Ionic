@@ -1,0 +1,60 @@
+
+
+<ion-content padding class = "background">
+
+  <!-- <ion-img [src]="item.src"></ion-img> -->
+  <!-- <img src = "../../../assets/niklas-rhose-FlmXvqlD-nI-unsplash-1@3x.png" /> -->
+
+  
+  <div class = "icon">
+    <img id = "logo" src = "../../../assets/icon final 2.png" /> 
+  </div>
+
+    <form [formGroup]="credentialsForm" (ngSubmit)="onSubmit()" class = "loginForm">
+
+            <ion-item mode = "ios" color = "transparent">
+        <ion-label position="floating" color = "primary">
+          <ion-icon name="person-outline" style = "color: #FF4757;"></ion-icon>
+          Âge</ion-label>
+        <ion-input type="number" formControlName="age" color = "primary"></ion-input>
+      </ion-item>
+
+      <ion-item mode = "ios" color = "transparent">
+        <ion-label position="floating" color = "primary">
+          <ion-icon name="person-outline" style = "color: #FF4757;"></ion-icon>
+          Sexe</ion-label>
+          <ion-select mode = "ios" formControlName="gender">
+            <ion-select-option value="F">Femme</ion-select-option>
+            <ion-select-option value="M">Homme</ion-select-option>
+          </ion-select>
+      </ion-item>
+ 
+      <ion-item mode = "ios" color = "transparent">
+        <ion-label position="floating" color = "primary">
+          <ion-icon name="person-circle-outline" style = "color: #FF4757;"></ion-icon>
+          Taille</ion-label>
+        <ion-input type="number" formControlName="height" color = "primary"></ion-input>
+        <ion-label>cm</ion-label>
+      </ion-item>
+   
+      <ion-item mode = "ios" color = "transparent">
+        <ion-label position="floating" color = "primary">
+          <ion-icon name="lock-closed-outline" style = "color: #FF4757;"></ion-icon>
+          Poids</ion-label>
+        <ion-input type="number" formControlName="weight" color = "primary"></ion-input>
+        <ion-label>kg</ion-label>
+      </ion-item>
+
+
+
+      <div class = "loginButtons">
+        <ion-button mode = "ios" id = "logButton" expand="block" color="danger" type="submit" >Continuer</ion-button>
+      </div>
+   
+
+      <!-- <ion-button expand="full" type="button" (click)="register()" [disabled]="!credentialsForm.valid">Register</ion-button> -->
+   
+    </form>
+  
+
+</ion-content>

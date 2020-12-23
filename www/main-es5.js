@@ -343,6 +343,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           return m.MentionsPageModule;
         });
       }
+    }, {
+      path: 'sliders',
+      loadChildren: function loadChildren() {
+        return __webpack_require__.e(
+        /*! import() | sliders-sliders-module */
+        "sliders-sliders-module").then(__webpack_require__.bind(null,
+        /*! ./sliders/sliders.module */
+        "./src/app/sliders/sliders.module.ts")).then(function (m) {
+          return m.SlidersPageModule;
+        });
+      }
     }];
 
     var AppRoutingModule = function AppRoutingModule() {
@@ -439,9 +450,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! @angular/router */
     "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    /* harmony import */
+
+
+    var _ionic_storage__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+    /*! @ionic/storage */
+    "./node_modules/@ionic/storage/__ivy_ngcc__/fesm2015/ionic-storage.js");
 
     var AppComponent = /*#__PURE__*/function () {
-      function AppComponent(platform, splashScreen, statusBar, auth, router) {
+      function AppComponent(platform, splashScreen, statusBar, auth, router, storage) {
         _classCallCheck(this, AppComponent);
 
         this.platform = platform;
@@ -449,6 +466,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.statusBar = statusBar;
         this.auth = auth;
         this.router = router;
+        this.storage = storage;
         this.initializeApp();
       }
 
@@ -466,7 +484,29 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               if (state) {
                 _this.router.navigate(['tabs']);
               } else {
+                console.log(state);
+
                 _this.router.navigate(['login']);
+              }
+            });
+
+            _this.auth.registerState.subscribe(function (state) {
+              if (state) {
+                _this.router.navigate(['macros-calculator']);
+              } else {
+                _this.router.navigate(['register']);
+              }
+            });
+
+            _this.storage.get('firstTime').then(function (value) {
+              if (value) {
+                console.log(value);
+              } else {
+                console.log('out');
+
+                _this.storage.set('firstTime', 'true');
+
+                _this.router.navigate(['sliders']);
               }
             });
           });
@@ -487,6 +527,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         type: _services_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"]
       }, {
         type: _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"]
+      }, {
+        type: _ionic_storage__WEBPACK_IMPORTED_MODULE_7__["Storage"]
       }];
     };
 
@@ -1137,6 +1179,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.url = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].url;
         this.user = null;
         this.authenticationState = new rxjs__WEBPACK_IMPORTED_MODULE_7__["BehaviorSubject"](false);
+        this.registerState = new rxjs__WEBPACK_IMPORTED_MODULE_7__["BehaviorSubject"](false);
         this.plt.ready().then(function () {
           _this4.checkToken();
         });
@@ -1175,14 +1218,33 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           return spl2.substring(0, spl2.length - 3);
         }
       }, {
+        key: "loginAfterRegister",
+        value: function loginAfterRegister(credentials) {
+          var _this6 = this;
+
+          return this.http.post("".concat(this.url, "/users/login"), credentials).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["tap"])(function (res) {
+            _this6.storage.set(TOKEN_KEY, res['token']);
+
+            _this6.user = _this6.helper.decodeToken(res['token']);
+
+            if (_this6.user.paidStatus === false) {
+              _this6.showAlert('Votre compte n\'est pas activé ! Veuillez contacter votre coach sportif.');
+            } else _this6.registerState.next(true);
+          }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["catchError"])(function (e) {
+            _this6.showAlert(e.error.msg);
+
+            throw new Error(e);
+          }));
+        }
+      }, {
         key: "register",
         value: function register(credentials) {
-          var _this6 = this;
+          var _this7 = this;
 
           return this.http.post("".concat(this.url, "/users/register"), credentials).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["catchError"])(function (e) {
             console.log(e.error.msg);
 
-            _this6.showAlert(e.error.msg);
+            _this7.showAlert(e.error.msg);
 
             throw new Error(e);
           }));
@@ -1209,88 +1271,37 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "login",
         value: function login(credentials) {
-          var _this7 = this;
+          var _this8 = this;
 
           return this.http.post("".concat(this.url, "/users/login"), credentials).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["tap"])(function (res) {
-            _this7.storage.set(TOKEN_KEY, res['token']);
+            _this8.storage.set(TOKEN_KEY, res['token']);
 
-            _this7.user = _this7.helper.decodeToken(res['token']);
+            _this8.user = _this8.helper.decodeToken(res['token']);
 
-            if (_this7.user.paidStatus === false) {
-              _this7.showAlert('Votre compte n\'est pas activé ! Veuillez contacter votre coach sportif.');
-            } else _this7.authenticationState.next(true);
+            if (_this8.user.paidStatus === false) {
+              _this8.showAlert('Votre compte n\'est pas activé ! Veuillez contacter votre coach sportif.');
+            } else _this8.authenticationState.next(true);
           }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["catchError"])(function (e) {
-            _this7.showAlert(e.error.msg);
+            _this8.showAlert(e.error.msg);
 
             throw new Error(e);
           }));
-          /*       if(this.plt.is('cordova')) {
-                  return this.postHttpNative(`${this.url}/users/login`, credentials).pipe(
-                    tap(res => {
-                      console.log(res);
-                      console.log(JSON.parse(res.data));
-                      this.token = JSON.parse(res.data)['token'];
-                      this.storage.set(TOKEN_KEY, JSON.parse(res.data)['token']);
-                      this.user = this.helper.decodeToken(JSON.parse(res.data)['token']);
-                      this.authenticationState.next(true);
-                    }),
-                    catchError(e => {
-                      console.log(e);
-                      this.showAlert(e.error.msg);
-                      throw new Error(e);
-                    })
-                  )
-                }
-            
-                else {
-                  return this.postHttp(`${this.url}/users/login`, credentials).pipe(
-                    tap(res => {
-                      console.log(res);
-                      console.log(res['token'])
-                      this.storage.set(TOKEN_KEY, res['token']);
-                      this.user = this.helper.decodeToken(res['token']);
-                      this.authenticationState.next(true);
-                    }),
-                    catchError(e => {
-                      console.log(e);
-                      this.showAlert(e.error.msg);
-                      throw new Error(e);
-                    })
-                  )
-                } */
         }
       }, {
         key: "logout",
         value: function logout() {
-          var _this8 = this;
+          var _this9 = this;
 
           this.storage.remove(TOKEN_KEY).then(function () {
-            _this8.authenticationState.next(false);
+            _this9.authenticationState.next(false);
           });
         }
       }, {
         key: "getSpecialData",
         value: function getSpecialData() {
-          var _this9 = this;
-
-          return this.http.get("".concat(this.url, "/users/special")).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["catchError"])(function (e) {
-            var status = e.status;
-
-            if (status === 401) {
-              _this9.showAlert('Vous n\'êtes pas authentifié !');
-
-              _this9.logout();
-            }
-
-            throw new Error(e);
-          }));
-        }
-      }, {
-        key: "getInformations",
-        value: function getInformations() {
           var _this10 = this;
 
-          return this.http.get("".concat(this.url, "/users/informations")).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["catchError"])(function (e) {
+          return this.http.get("".concat(this.url, "/users/special")).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["catchError"])(function (e) {
             var status = e.status;
 
             if (status === 401) {
@@ -1303,15 +1314,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }));
         }
       }, {
-        key: "addRecipeToFavorites",
-        value: function addRecipeToFavorites(recipe) {
+        key: "getInformations",
+        value: function getInformations() {
           var _this11 = this;
 
-          console.log('inside addRecipe Auth');
-          console.log(recipe);
-          return this.http.post("".concat(this.url, "/users/addRecipe"), recipe).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["catchError"])(function (e) {
+          return this.http.get("".concat(this.url, "/users/informations")).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["catchError"])(function (e) {
             var status = e.status;
-            console.log(status);
 
             if (status === 401) {
               _this11.showAlert('Vous n\'êtes pas authentifié !');
@@ -1323,11 +1331,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }));
         }
       }, {
-        key: "removeRecipeFromFavorites",
-        value: function removeRecipeFromFavorites(recipe) {
+        key: "addRecipeToFavorites",
+        value: function addRecipeToFavorites(recipe) {
           var _this12 = this;
 
-          return this.http.post("".concat(this.url, "/users/removeRecipe"), recipe).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["catchError"])(function (e) {
+          console.log('inside addRecipe Auth');
+          console.log(recipe);
+          return this.http.post("".concat(this.url, "/users/addRecipe"), recipe).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["catchError"])(function (e) {
             var status = e.status;
             console.log(status);
 
@@ -1341,13 +1351,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }));
         }
       }, {
-        key: "getAllRecipes",
-        value: function getAllRecipes() {
+        key: "removeRecipeFromFavorites",
+        value: function removeRecipeFromFavorites(recipe) {
           var _this13 = this;
 
-          console.log('inside getAllRecipes');
-          return this.http.get("".concat(this.url, "/users/recipes")).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["catchError"])(function (e) {
+          return this.http.post("".concat(this.url, "/users/removeRecipe"), recipe).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["catchError"])(function (e) {
             var status = e.status;
+            console.log(status);
 
             if (status === 401) {
               _this13.showAlert('Vous n\'êtes pas authentifié !');
@@ -1359,10 +1369,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }));
         }
       }, {
-        key: "loadFavorites",
-        value: function loadFavorites() {
+        key: "getAllRecipes",
+        value: function getAllRecipes() {
           var _this14 = this;
 
+          console.log('inside getAllRecipes');
           return this.http.get("".concat(this.url, "/users/recipes")).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["catchError"])(function (e) {
             var status = e.status;
 
@@ -1370,6 +1381,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               _this14.showAlert('Vous n\'êtes pas authentifié !');
 
               _this14.logout();
+            }
+
+            throw new Error(e);
+          }));
+        }
+      }, {
+        key: "loadFavorites",
+        value: function loadFavorites() {
+          var _this15 = this;
+
+          return this.http.get("".concat(this.url, "/users/recipes")).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["catchError"])(function (e) {
+            var status = e.status;
+
+            if (status === 401) {
+              _this15.showAlert('Vous n\'êtes pas authentifié !');
+
+              _this15.logout();
             }
 
             throw new Error(e);
@@ -1578,7 +1606,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "getHelloWorld",
         value: function getHelloWorld() {
           return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-            var _this15 = this;
+            var _this16 = this;
 
             return regeneratorRuntime.wrap(function _callee4$(_context4) {
               while (1) {
@@ -1594,7 +1622,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     _context4.next = 4;
                     return this.getHttpNative(this.url).then(function (data) {
                       console.log(data);
-                      _this15.data = JSON.parse(data.data);
+                      _this16.data = JSON.parse(data.data);
                     });
 
                   case 4:
@@ -1605,7 +1633,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     _context4.next = 8;
                     return this.getHttp(this.url).then(function (data) {
                       console.log(data);
-                      _this15.data = data;
+                      _this16.data = data;
                     });
 
                   case 8:
@@ -1630,7 +1658,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "loadRecipes",
         value: function loadRecipes() {
           return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
-            var _this16 = this;
+            var _this17 = this;
 
             return regeneratorRuntime.wrap(function _callee5$(_context5) {
               while (1) {
@@ -1644,7 +1672,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     _context5.next = 3;
                     return this.getHttpNative("".concat(this.url, "/recipes")).then(function (data) {
                       console.log(data);
-                      _this16.recipes = JSON.parse(data.data);
+                      _this17.recipes = JSON.parse(data.data);
                     });
 
                   case 3:
@@ -1655,7 +1683,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     _context5.next = 7;
                     return this.getHttp("".concat(this.url, "/recipes")).then(function (data) {
                       console.log(data);
-                      _this16.recipes = data;
+                      _this17.recipes = data;
                     });
 
                   case 7:
@@ -1675,7 +1703,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "loadRecipeById",
         value: function loadRecipeById(recipeId) {
           return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
-            var _this17 = this;
+            var _this18 = this;
 
             return regeneratorRuntime.wrap(function _callee6$(_context6) {
               while (1) {
@@ -1689,7 +1717,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     _context6.next = 3;
                     return this.getHttpNative("".concat(this.url, "/recipes/").concat(recipeId)).then(function (data) {
                       console.log(data);
-                      _this17.recipe = JSON.parse(data.data);
+                      _this18.recipe = JSON.parse(data.data);
                     });
 
                   case 3:
@@ -1700,7 +1728,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     _context6.next = 7;
                     return this.getHttp("".concat(this.url, "/recipes/").concat(recipeId)).then(function (data) {
                       console.log(data);
-                      _this17.recipe = data;
+                      _this18.recipe = data;
                     });
 
                   case 7:
@@ -1720,7 +1748,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "loadFavorites",
         value: function loadFavorites() {
           return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
-            var _this18 = this;
+            var _this19 = this;
 
             return regeneratorRuntime.wrap(function _callee7$(_context7) {
               while (1) {
@@ -1734,7 +1762,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     _context7.next = 3;
                     return this.getHttpNative("".concat(this.url, "/users/recipes")).then(function (data) {
                       console.log(data);
-                      _this18.favorites = JSON.parse(data.data);
+                      _this19.favorites = JSON.parse(data.data);
                     });
 
                   case 3:
@@ -1745,7 +1773,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     _context7.next = 7;
                     return this.getHttp("".concat(this.url, "/users/recipes")).then(function (data) {
                       console.log(data);
-                      _this18.favorites = data;
+                      _this19.favorites = data;
                     });
 
                   case 7:
@@ -1857,12 +1885,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _ionic_storage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @ionic/storage */
+    "./node_modules/@ionic/storage/__ivy_ngcc__/fesm2015/ionic-storage.js");
 
     var FavoritesService = /*#__PURE__*/function () {
-      function FavoritesService(authService) {
+      function FavoritesService(authService, storage) {
         _classCallCheck(this, FavoritesService);
 
         this.authService = authService;
+        this.storage = storage;
         this.favorites = [];
         console.log('I am in favorites services');
       }
@@ -1872,6 +1907,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function addFavorite(recipe) {
           this.favorites.push(recipe);
           this.addRecipe(recipe);
+          this.storage.set('favorites', this.favorites[0].name);
         }
       }, {
         key: "removeFavorite",
@@ -1922,7 +1958,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "loadFavorites",
         value: function loadFavorites() {
           return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee9() {
-            var _this19 = this;
+            var _this20 = this;
 
             return regeneratorRuntime.wrap(function _callee9$(_context9) {
               while (1) {
@@ -1931,10 +1967,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     this.authService.loadFavorites().subscribe(function (result) {
                       console.log(result);
 
-                      _this19.authService.setFavorites(result);
+                      _this20.authService.setFavorites(result);
 
-                      _this19.favorites = _this19.authService.getFavorites();
-                      console.log(_this19.favorites);
+                      _this20.favorites = _this20.authService.getFavorites();
+                      console.log(_this20.favorites);
                     });
 
                   case 1:
@@ -1958,6 +1994,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     FavoritesService.ctorParameters = function () {
       return [{
         type: _auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"]
+      }, {
+        type: _ionic_storage__WEBPACK_IMPORTED_MODULE_3__["Storage"]
       }];
     };
 
@@ -2043,22 +2081,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "filterMacros",
         value: function filterMacros(proteins, fats, carbs) {
-          var _this20 = this;
+          var _this21 = this;
 
           this.loadRecipes().then(function (result) {
-            _this20.recipes = _this20.recipes.filter(function (recipe) {
+            _this21.recipes = _this21.recipes.filter(function (recipe) {
               return Math.abs(recipe.proteins - proteins) <= 10 && Math.abs(recipe.fats - fats) <= 10 && Math.abs(recipe.carbs - carbs) <= 10;
             });
-            console.log(_this20.recipes);
+            console.log(_this21.recipes);
           });
         }
       }, {
         key: "filterBySearch",
         value: function filterBySearch(searchTerm) {
-          var _this21 = this;
+          var _this22 = this;
 
           this.loadRecipes().then(function (result) {
-            _this21.recipes = _this21.recipes.filter(function (currentRecipe) {
+            _this22.recipes = _this22.recipes.filter(function (currentRecipe) {
               if (currentRecipe.name && searchTerm) {
                 return currentRecipe.name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
               }

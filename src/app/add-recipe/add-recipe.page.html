@@ -76,6 +76,9 @@
         allow-empty-selection = "true"
         name="radio-group"
         (ionChange)="radioGroupChange($event, 'Type')">
+        <ion-list-header>
+          <ion-label>Sucré/Salé</ion-label>
+        </ion-list-header>
 
         <ion-item *ngFor = "let type of getAllValuesEnum('Type')">
           <ion-label>{{type}}</ion-label>
@@ -90,6 +93,9 @@
         allow-empty-selection = "true"
         name="radio-group"
         (ionChange)="radioGroupChange($event, 'Diet')">
+        <ion-list-header>
+          <ion-label>Régime/Allergies</ion-label>
+        </ion-list-header>
 
         <ion-item *ngFor = "let diet of getAllValuesEnum('Diet')">
           <ion-label>{{diet}}</ion-label>

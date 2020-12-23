@@ -25,6 +25,8 @@ export class AuthService {
   registerState = new BehaviorSubject(false);
   favorites;
   token;
+  temporary_email;
+  temporary_password;
  
   constructor(private http: HttpClient, private helper: JwtHelperService, private storage: Storage,
     private plt: Platform, private alertController: AlertController, private httpNative: HTTP, private loadingCtrl: LoadingController) {
@@ -82,13 +84,34 @@ export class AuthService {
  
    register(credentials) {
      return this.http.post(`${this.url}/users/register`, credentials).pipe(
+       tap( res => {
+         console.log(res);
+         this.temporary_email = res['email'];
+         this.temporary_password = res['password'];
+         this.registerState.next(true);
+       }),
       catchError(e => {
         console.log(e.error.msg);
         this.showAlert(e.error.msg);
         throw new Error(e);
       })
     );
-   } 
+   }
+   
+   addInformations(credentials) {
+     console.log(this.temporary_email);
+     console.log(credentials);
+     return this.http.post(`${this.url}/users/informations`, credentials).pipe(
+      tap( res => {
+        console.log(res);
+      }),
+     catchError(e => {
+       console.log(e.error.msg);
+       this.showAlert(e.error.msg);
+       throw new Error(e);
+     })
+   );
+   }
 /*     if(this.plt.is('cordova')) {
       return this.postHttpNative(`${this.url}/users/register`, credentials).pipe(
         catchError(e => {

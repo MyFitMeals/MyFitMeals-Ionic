@@ -1,0 +1,34 @@
+
+
+.background
+{
+    //background-image: url('../../../assets/background.png');
+    --background: #fff url('../../../assets/backgroundRegister.png') no-repeat center center / cover;
+}
+
+.loginForm
+{
+    text-align: center;
+    padding: 0.7em;
+    margin-top: 2em;
+
+}
+
+.loginButtons
+{
+    margin-top: 3em;
+}
+
+.loginButtons #logButton {
+    margin-bottom: 1em;
+}
+
+#logo
+{
+    width: 30%;
+}
+
+.icon {
+    text-align: center;
+    margin-top: 5em;
+}
