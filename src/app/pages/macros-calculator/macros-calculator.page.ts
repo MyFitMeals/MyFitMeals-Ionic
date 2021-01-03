@@ -28,8 +28,7 @@ export class MacrosCalculatorPage implements OnInit {
   onSubmit() {
     this.authService.addInformations(this.credentialsForm.value).subscribe(res => {
       // Call Login to automatically login the new user
-      this.router.navigate(['login']);
-      this.authService.showAlert('Tu t\'es inscrit avec succès ! Contacte ton coach sportif pour pouvoir t\'abonner ;)');
+      this.router.navigate(['calories-intake']);
     });
   }
 

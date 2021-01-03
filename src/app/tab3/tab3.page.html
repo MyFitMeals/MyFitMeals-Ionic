@@ -16,7 +16,17 @@
   </div>
 
   <div id = "aboutMe">
-    <h5>A propos de moi</h5>
+    <h4>A propos de moi</h4>
+    <div class = "aboutMeElement" style = "width: 100%; text-align: center; ">
+      <h5>Calories journalières : {{getCalories()}}cals</h5></div>
+    <div id = "aboutMeAttributes">
+      <div class = "aboutMeElement">
+        <span class = "macrosDescription">P :</span> {{getProteins()}}%</div>
+      <div class = "aboutMeElement">
+        <span class = "macrosDescription">G :</span> {{getCarbs()}}%</div>
+        <div class = "aboutMeElement">
+          <span class = "macrosDescription">L :</span> {{getFats()}}%</div>
+    </div>
     <div id = "aboutMeAttributes">
       <div class = "aboutMeElement">
         <ion-icon name="calendar" style = "color: #FF4757;"></ion-icon>

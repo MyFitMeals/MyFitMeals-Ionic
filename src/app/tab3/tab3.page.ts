@@ -14,6 +14,10 @@ export class Tab3Page {
   private age: Number;
   private height: Number;
   private weight: Number;
+  private calories: Number;
+  private proteins: Number;
+  private carbs: Number;
+  private fats: Number;
 
 
   constructor(private favoritesService: FavoritesService,
@@ -28,6 +32,10 @@ export class Tab3Page {
     this.age = this.authService.userInformations['user']['age'];
     this.weight = this.authService.userInformations['user']['weight'];
     this.height = this.authService.userInformations['user']['height'];
+    this.calories = this.authService.userInformations['user']['calories'];
+    this.proteins = this.authService.userInformations['user']['proteins'];
+    this.carbs = this.authService.userInformations['user']['carbs'];
+    this.fats = this.authService.userInformations['user']['fats'];
   }
 
   getFirstName()
@@ -55,5 +63,21 @@ export class Tab3Page {
 
   getHeight() {
     return this.height;
+  }
+
+  getCalories() {
+    return this.calories;
+  }
+
+  getProteins() {
+    return this.proteins;
+  }
+
+  getCarbs() {
+    return this.carbs;
+  }
+
+  getFats() {
+    return this.fats;
   }
 }

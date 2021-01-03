@@ -52,6 +52,10 @@ const routes: Routes = [
   {
     path: 'macros-calculator',
     loadChildren: () => import('./pages/macros-calculator/macros-calculator.module').then( m => m.MacrosCalculatorPageModule)
+  },
+  {
+    path: 'calories-intake',
+    loadChildren: () => import('./pages/calories-intake/calories-intake.module').then( m => m.CaloriesIntakePageModule)
   }
 ];
 @NgModule({

@@ -25,7 +25,7 @@ export class Tab2Page {
 
   noFavorites()
   {
-   // return this.favoritesService.getFavorites().length == 0;
+    return this.favoritesService.getFavorites().length == 0;
   }
 
 

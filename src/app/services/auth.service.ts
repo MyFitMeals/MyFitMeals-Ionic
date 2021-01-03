@@ -111,6 +111,21 @@ export class AuthService {
      })
    );
    }
+
+   addCalories(credentials) {
+    console.log(this.temporary_email);
+    console.log(credentials);
+    return this.http.post(`${this.url}/users/calories`, credentials).pipe(
+     tap( res => {
+       console.log(res);
+     }),
+    catchError(e => {
+      console.log(e.error.msg);
+      this.showAlert(e.error.msg);
+      throw new Error(e);
+    })
+  );
+   }
 /*     if(this.plt.is('cordova')) {
       return this.postHttpNative(`${this.url}/users/register`, credentials).pipe(
         catchError(e => {
