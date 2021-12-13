@@ -296,8 +296,8 @@ export class AuthService {
   showAlert(msg) {
     let alert = this.alertController.create({
       message: msg,
-      header: 'Erreur',
-      buttons: ['OK']
+      header: 'Info',
+      buttons: ['D\'accord']
     });
     alert.then(alert => alert.present());
   }

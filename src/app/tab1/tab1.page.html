@@ -7,7 +7,16 @@
       <ion-button id="changeText"  (click) = "presentPopover($event)">
         <ion-icon slot="start" name="apps-outline"></ion-icon>
       </ion-button>
+
+      
     </ion-buttons>
+    <div id = "saltyOrNot">
+      Sucré<ion-toggle mode = "ios" (ionChange)="filterBySaltOrSweet($event)"></ion-toggle>Salé
+      <span style="color: hotpink; text-decoration: underline; font-size: 85%; padding-left: 10px;" (click) = "resetRecipes()">
+        Annuler les filtres
+      </span>
+    </div>
+    
   </ion-toolbar>
  
 

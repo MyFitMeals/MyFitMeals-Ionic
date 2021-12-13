@@ -41,3 +41,15 @@ ion-content ion-toolbar {
   .my-custom-class .popover-content {
     background: #222;
   }
+
+  ion-toggle {
+    --background: #ed576b;
+    --background-checked: #eb445a;
+  
+    --handle-background: #fff;
+    --handle-background-checked: #fff;
+  }
+
+  #saltyOrNot {
+    padding-left: 15px;
+  }

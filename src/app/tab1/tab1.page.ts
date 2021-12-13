@@ -23,6 +23,7 @@ export class Tab1Page {
   proteinFiltered: boolean = false;
   carbsFiltered: boolean = false;
   fatsFiltered: boolean = false;
+  sweetOrsalt;
 
   constructor(private backendService: BackendService, public loadingController: LoadingController,
     private popoverController: PopoverController, private recipesLoder: RecipesLoaderService,
@@ -52,6 +53,20 @@ export class Tab1Page {
     }
 
     else  this.recipesLoder.filterBySearch(searchTerm);
+  }
+
+  async filterBySaltOrSweet(event) {
+    if(event.detail.checked) {
+      this.recipesLoder.filterBySalty();
+    }
+
+    else {
+      this.recipesLoder.filterBySweety();
+    }
+  }
+
+  async resetRecipes() {
+    this.recipesLoder.loadRecipes();
   }
   
 

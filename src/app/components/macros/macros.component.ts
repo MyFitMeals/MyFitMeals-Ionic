@@ -11,9 +11,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class MacrosComponent implements OnInit {
 
-  private proteins: number;
-  private carbs: number;
-  private fats: number;
+  proteins: number;
+  carbs: number;
+  fats: number;
   macrosForm: FormGroup;
   valueSegment;
   

@@ -1,6 +1,7 @@
 import { Recipe } from './../models/recipe';
 import { BackendService } from './backend.service';
 import { Injectable } from '@angular/core';
+import { Type } from '../models/type';
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +49,25 @@ export class RecipesLoaderService {
         }
       });
     })
+  }
 
+  filterBySalty() {
+    this.loadRecipes().then(result => {
+      this.recipes = this.recipes.filter(currentRecipe => {
+        if (currentRecipe.name) {
+          return (currentRecipe.type == Type.SALE);
+        }
+      });
+    })
+  }
+
+  filterBySweety() {
+    this.loadRecipes().then(result => {
+      this.recipes = this.recipes.filter(currentRecipe => {
+        if (currentRecipe.name) {
+          return (currentRecipe.type == Type.SUCRE);
+        }
+      });
+    })
   }
 }
